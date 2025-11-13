@@ -1,0 +1,193 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: thiago
+      changes:
+        - createTable:
+            tableName: business
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: business_alias
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: business
+            indexName: idx_business_alias
+            columns:
+              - column:
+                  name: business_alias
+        - createTable:
+            tableName: business_languages
+            columns:
+              - column:
+                  name: business_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: language
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: business_languages
+            columnNames: business_id, language
+
+        - createTable:
+            tableName: catalog
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: business_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: catalog
+            baseColumnNames: business_id
+            referencedTableName: business
+            referencedColumnNames: id
+            constraintName: fk_catalog_business
+
+        - createTable:
+            tableName: catalog_translation
+            columns:
+              - column:
+                  name: catalog_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: language
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: catalog_translation
+            columnNames: catalog_id, language
+        - addForeignKeyConstraint:
+            baseTableName: catalog_translation
+            baseColumnNames: catalog_id
+            referencedTableName: catalog
+            referencedColumnNames: id
+            constraintName: fk_catalog_translation_catalog
+
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: catalog_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: category
+            baseColumnNames: catalog_id
+            referencedTableName: catalog
+            referencedColumnNames: id
+            constraintName: fk_category_catalog
+
+        - createTable:
+            tableName: category_translation
+            columns:
+              - column:
+                  name: category_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: language
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: category_translation
+            columnNames: category_id, language
+        - addForeignKeyConstraint:
+            baseTableName: category_translation
+            baseColumnNames: category_id
+            referencedTableName: category
+            referencedColumnNames: id
+            constraintName: fk_category_translation_category
+
+        - createTable:
+            tableName: offering
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: category_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: numeric
+        - addForeignKeyConstraint:
+            baseTableName: offering
+            baseColumnNames: category_id
+            referencedTableName: category
+            referencedColumnNames: id
+            constraintName: fk_offering_category
+
+        - createTable:
+            tableName: offering_translation
+            columns:
+              - column:
+                  name: offering_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: language
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+        - addPrimaryKey:
+            tableName: offering_translation
+            columnNames: offering_id, language
+        - addForeignKeyConstraint:
+            baseTableName: offering_translation
+            baseColumnNames: offering_id
+            referencedTableName: offering
+            referencedColumnNames: id
+            constraintName: fk_offering_translation_offering
