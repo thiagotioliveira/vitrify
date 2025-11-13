@@ -22,6 +22,11 @@ public class BusinessRepositoryAdapter implements BusinessRepository {
   }
 
   @Override
+  public Optional<Business> findByAlias(String alias) {
+    return this.businessEntityRepository.findByAlias(alias).map(BusinessEntity::toDomain);
+  }
+
+  @Override
   public void save(Business business) {
     this.businessEntityRepository.save(BusinessEntity.fromDomain(business));
   }

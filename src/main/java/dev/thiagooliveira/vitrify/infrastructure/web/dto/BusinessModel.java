@@ -1,0 +1,32 @@
+package dev.thiagooliveira.vitrify.infrastructure.web.dto;
+
+import dev.thiagooliveira.vitrify.domain.model.Business;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class BusinessModel {
+
+  private final String name;
+  private final List<String> supportedLanguages;
+  private final List<CatalogModel> catalogs;
+
+  public BusinessModel(Business business) {
+    this.name = business.getName();
+    this.supportedLanguages =
+        business.getSupportedLanguages().stream().map(Enum::name).collect(Collectors.toList());
+    this.catalogs =
+        business.getCatalogs().stream().map(CatalogModel::new).collect(Collectors.toList());
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public List<String> getSupportedLanguages() {
+    return supportedLanguages;
+  }
+
+  public List<CatalogModel> getCatalogs() {
+    return catalogs;
+  }
+}
