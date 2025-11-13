@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8" />
+    <title>Menu do Business</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 320px;
+            --header-height: 72px;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        body {
+            background-color: #f8f9fa;
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        .site-header {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            background: #ffffff;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+        }
+
+        .site-header .brand {
+            display:flex;
+            align-items:center;
+            gap: 0.75rem;
+        }
+
+        .site-header .brand img {
+            height: 56px;
+            width: 56px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .site-header .controls {
+            display:flex;
+            align-items:center;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 0;
+            max-width: var(--sidebar-width);
+            overflow: hidden;
+            background: #fff;
+            box-shadow: -4px 0 14px rgba(0,0,0,0.12);
+            transition: width 280ms ease;
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            box-sizing: border-box;
+        }
+
+        .sidebar.open {
+            width: var(--sidebar-width);
+        }
+
+        .sidebar .close-btn {
+            align-self: flex-end;
+            border: none;
+            background: transparent;
+            font-size: 1.4rem;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        .sidebar .sidebar-body {
+            margin-top: 0.5rem;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .sidebar .logo-lg {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            margin: 0.5rem auto 1rem;
+        }
+
+        .sidebar .social-icons a {
+            font-size: 1.25rem;
+            margin-right: 0.5rem;
+            color: #333;
+        }
+
+        body.sidebar-open { overflow: hidden; }
+
+        .main-container {
+            padding: 2rem 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .category-title { margin-top: 2rem; margin-bottom: 1rem; }
+        .offering-card { cursor: pointer; transition: transform 0.1s ease; }
+        .offering-card:hover { transform: translateY(-2px); }
+        .offering-card img { object-fit: cover; height: 200px; width: 100%; border-radius: 6px 6px 0 0; }
+        .price-tag { font-weight: 700; }
+
+        @media (max-width: 576px) {
+            .site-header .brand h1 { font-size: 1rem; }
+            .site-header .brand img { height: 44px; width: 44px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="brand">
+        <img src="https://placehold.co/120x120/png?text=Logo" alt="Logo do Business" id="headerLogo">
+        <div>
+            <div id="businessTitle" class="h6 mb-0">Restaurante Exemplo</div>
+            <small id="businessSubtitle" class="text-muted">Menu Oficial</small>
+        </div>
+    </div>
+
+    <div class="controls">
+        <select id="languageSelect" class="form-select form-select-sm" style="width:110px;">
+            <option value="PT">PT</option>
+            <option value="EN">EN</option>
+            <option value="ES">ES</option>
+        </select>
+
+        <button id="openSidebarBtn" class="btn-icon" aria-label="Open menu">
+            <i class="bi bi-list"></i>
+        </button>
+    </div>
+</header>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar" aria-hidden="true">
+    <button id="closeSidebarBtn" class="close-btn" aria-label="Close">
+        <i class="bi bi-x-lg"></i>
+    </button>
+
+    <div class="sidebar-body">
+        <img src="https://placehold.co/240x240/png?text=Logo" alt="Logo" class="logo-lg">
+        <h4>Restaurante Exemplo</h4>
+        <p class="text-muted">Rua Exemplo, 123 — Lisboa, Portugal</p>
+        <hr>
+        <h6>Redes sociais</h6>
+        <div class="social-icons mb-3">
+            <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+        <hr>
+        <h6>Informações</h6>
+        <p class="small text-muted mb-0">Aberto: 12:00 — 22:00</p>
+        <p class="small text-muted">Telefone: +351 912 345 678</p>
+    </div>
+</aside>
+
+<!-- Main content -->
+<main class="main-container">
+    <section class="catalog">
+        <h2>Menu Principal</h2>
+
+        <div class="category-group">
+            <h4 class="category-title">Entradas</h4>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+
+                <div class="col">
+                    <div class="card offering-card h-100"
+                         data-title="Bruschetta"
+                         data-description="Pão torrado com tomate, alho e manjericão."
+                         data-price="5.50€"
+                         data-image="https://placehold.co/600x400/png?text=Bruschetta">
+                        <img src="https://placehold.co/600x400/png?text=Bruschetta" class="card-img-top" alt="Bruschetta">
+                        <div class="card-body">
+                            <h5 class="card-title">Bruschetta</h5>
+                            <p class="card-text text-muted small">Pão torrado com tomate, alho e manjericão.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <div class="price-tag">5.50€</div>
+                            <button class="btn btn-outline-primary btn-sm">Ver</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card offering-card h-100"
+                         data-title="Salada Verde"
+                         data-description="Mix de folhas, pepino e molho de limão."
+                         data-price="4.00€"
+                         data-image="https://placehold.co/600x400/png?text=Salada+Verde">
+                        <img src="https://placehold.co/600x400/png?text=Salada+Verde" class="card-img-top" alt="Salada Verde">
+                        <div class="card-body">
+                            <h5 class="card-title">Salada Verde</h5>
+                            <p class="card-text text-muted small">Mix de folhas, pepino e molho de limão.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <div class="price-tag">4.00€</div>
+                            <button class="btn btn-outline-primary btn-sm">Ver</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Modal -->
+<div class="modal fade" id="offeringModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="" class="img-fluid rounded-top">
+            <div class="modal-body">
+                <h5 id="modalTitle"></h5>
+                <p id="modalDescription" class="text-muted"></p>
+                <div id="modalPrice" class="fw-bold fs-5"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const openBtn = document.getElementById('openSidebarBtn');
+    const closeBtn = document.getElementById('closeSidebarBtn');
+    const sidebar = document.getElementById('sidebar');
+    const modal = new bootstrap.Modal(document.getElementById('offeringModal'));
+
+    openBtn.addEventListener('click', () => {
+        sidebar.classList.add('open');
+        document.body.classList.add('sidebar-open');
+    });
+    closeBtn.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        document.body.classList.remove('sidebar-open');
+    });
+
+    document.addEventListener('click', e => {
+        if (!sidebar.classList.contains('open')) return;
+        if (!sidebar.contains(e.target) && !openBtn.contains(e.target)) {
+            sidebar.classList.remove('open');
+            document.body.classList.remove('sidebar-open');
+        }
+    });
+
+    // Modal logic
+    document.querySelectorAll('.offering-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.getElementById('modalTitle').textContent = card.dataset.title;
+            document.getElementById('modalDescription').textContent = card.dataset.description;
+            document.getElementById('modalPrice').textContent = card.dataset.price;
+            document.getElementById('modalImage').src = card.dataset.image;
+            modal.show();
+        });
+    });
+</script>
+</body>
+</html>
