@@ -7,21 +7,21 @@ import org.apache.commons.lang3.StringUtils;
 public class Catalog {
   private UUID id;
   private LocalizedContent name;
-  private Set<Category> categories;
+  private List<Category> categories;
 
-  private Catalog(UUID id, LocalizedContent name, Set<Category> categories) {
+  private Catalog(UUID id, LocalizedContent name, List<Category> categories) {
     this.id = id;
     this.name = name;
     this.categories = categories;
   }
 
-  public static Catalog load(UUID id, LocalizedContent name, Set<Category> categories) {
+  public static Catalog load(UUID id, LocalizedContent name, List<Category> categories) {
     return new Catalog(id, name, categories);
   }
 
   public static Catalog create(LocalizedContent name) {
     validate(name);
-    return new Catalog(UUID.randomUUID(), name, new LinkedHashSet<>());
+    return new Catalog(UUID.randomUUID(), name, new ArrayList<>());
   }
 
   public void update(LocalizedContent name) {
@@ -72,7 +72,7 @@ public class Catalog {
     return name;
   }
 
-  public Set<Category> getCategories() {
-    return Collections.unmodifiableSet(categories);
+  public List<Category> getCategories() {
+    return Collections.unmodifiableList(categories);
   }
 }

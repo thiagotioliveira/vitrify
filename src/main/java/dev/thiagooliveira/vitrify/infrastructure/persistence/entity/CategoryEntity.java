@@ -68,10 +68,10 @@ public class CategoryEntity {
                     t -> new LocalizedText(t.getId().getLanguage(), t.getName())));
     LocalizedContent name = new LocalizedContent(map);
 
-    Set<Offering> offeringSet =
+    List<Offering> offeringSet =
         offerings != null
-            ? offerings.stream().map(OfferingEntity::toDomain).collect(Collectors.toSet())
-            : new HashSet<>();
+            ? offerings.stream().map(OfferingEntity::toDomain).collect(Collectors.toList())
+            : new ArrayList<>();
 
     return Category.load(id, name, offeringSet);
   }

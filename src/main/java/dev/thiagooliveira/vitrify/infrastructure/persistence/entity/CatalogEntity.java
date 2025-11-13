@@ -54,8 +54,8 @@ public class CatalogEntity {
                     t -> new LocalizedText(t.getId().getLanguage(), t.getName())));
     LocalizedContent name = new LocalizedContent(map);
 
-    Set<Category> categoryList =
-        categories.stream().map(CategoryEntity::toDomain).collect(Collectors.toSet());
+    List<Category> categoryList =
+        categories.stream().map(CategoryEntity::toDomain).collect(Collectors.toList());
 
     return Catalog.load(id, name, categoryList);
   }

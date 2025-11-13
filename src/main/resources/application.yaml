@@ -25,3 +25,137 @@ logging:
     #org.hibernate.orm.jdbc.bind: TRACE
     dev.thiagooliveira: DEBUG
     #liquibase: DEBUG
+
+app:
+  seed:
+    business:
+      name: "Sabor & Arte"
+      supported-languages: ["PT", "EN"]
+      catalogs:
+        - name:
+            PT: "Almoço"
+            EN: "Lunch"
+          categories:
+            - name:
+                PT: "Entradas"
+                EN: "Starters"
+              offerings:
+                - name:
+                    PT: "Salada Caprese"
+                    EN: "Caprese Salad"
+                  description:
+                    PT: "Tomate, mussarela e manjericão"
+                    EN: "Tomato, mozzarella, basil"
+                  price: 5.50
+                - name:
+                    PT: "Bruschetta"
+                    EN: "Bruschetta"
+                  description:
+                    PT: "Pão, tomate, alho e azeite"
+                    EN: "Bread, tomato, garlic, olive oil"
+                  price: 4.00
+                - name:
+                    PT: "Sopa Fria"
+                    EN: "Cold Soup"
+                  description:
+                    PT: "Sopa refrescante do dia"
+                    EN: "Refreshing soup of the day"
+                  price: 6.00
+            - name:
+                PT: "Pratos Principais"
+                EN: "Main Courses"
+              offerings:
+                - name:
+                    PT: "Spaghetti Carbonara"
+                    EN: "Spaghetti Carbonara"
+                  description:
+                    PT: "Massa com bacon e queijo"
+                    EN: "Pasta with bacon and cheese"
+                  price: 12.00
+                - name:
+                    PT: "Frango Grelhado"
+                    EN: "Grilled Chicken"
+                  description:
+                    PT: "Frango com legumes e arroz"
+                    EN: "Chicken with vegetables and rice"
+                  price: 15.00
+                - name:
+                    PT: "Peixe ao Forno"
+                    EN: "Baked Fish"
+                  description:
+                    PT: "Peixe fresco assado com ervas"
+                    EN: "Fresh fish baked with herbs"
+                  price: 14.50
+            - name:
+                PT: "Sobremesas"
+                EN: "Desserts"
+              offerings:
+                - name:
+                    PT: "Pudim de Leite"
+                    EN: "Caramel Pudding"
+                  description:
+                    PT: "Pudim caseiro"
+                    EN: "Homemade pudding"
+                  price: 6.00
+                - name:
+                    PT: "Mousse de Chocolate"
+                    EN: "Chocolate Mousse"
+                  description:
+                    PT: "Mousse cremosa de chocolate"
+                    EN: "Creamy chocolate mousse"
+                  price: 5.50
+                - name:
+                    PT: "Tarte de Limão"
+                    EN: "Lemon Tart"
+                  description:
+                    PT: "Tarte de limão com merengue"
+                    EN: "Lemon tart with meringue"
+                  price: 6.50
+
+        - name:
+            PT: "Jantar"
+            EN: "Dinner"
+          categories:
+            - name:
+                PT: "Entradas"
+                EN: "Starters"
+              offerings:
+                - name:
+                    PT: "Sopa do Dia"
+                    EN: "Soup of the Day"
+                  description:
+                    PT: "Sabor especial do chef"
+                    EN: "Chef's special flavor"
+                  price: 3.50
+                - name:
+                    PT: "Salada Verde"
+                    EN: "Green Salad"
+                  description:
+                    PT: "Alface, rúcula e tomate"
+                    EN: "Lettuce, arugula, and tomato"
+                  price: 5.00
+            - name:
+                PT: "Pratos Principais"
+                EN: "Main Courses"
+              offerings:
+                - name:
+                    PT: "Bacalhau à Brás"
+                    EN: "Codfish à Brás"
+                  description:
+                    PT: "Bacalhau desfiado com batata palha"
+                    EN: "Shredded cod with shoestring potatoes"
+                  price: 18.00
+                - name:
+                    PT: "Robalo Grelhado"
+                    EN: "Grilled Sea Bass"
+                  description:
+                    PT: "Robalo com legumes frescos"
+                    EN: "Sea bass with fresh vegetables"
+                  price: 20.00
+                - name:
+                    PT: "Frango ao Molho"
+                    EN: "Chicken with Sauce"
+                  description:
+                    PT: "Frango grelhado com molho especial"
+                    EN: "Grilled chicken with special sauce"
+                  price: 19.50

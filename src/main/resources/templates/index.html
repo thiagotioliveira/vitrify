@@ -164,21 +164,19 @@
         const container = document.getElementById('catalogItemsContainer');
         container.innerHTML = '';
 
-        const catalog = businessData.catalogs.find(c => c.id === catalogId) || businessData.catalogs[0];
-        if (!catalog) return;
-
-        // preencher select se ainda estiver vazio
+        // atualizar o select de catálogo para a linguagem atual
         const catalogSelect = document.getElementById('catalogSelect');
-        if (!catalogSelect.value) {
-            catalogSelect.innerHTML = '';
-            businessData.catalogs.forEach(c => {
-                const option = document.createElement('option');
-                option.value = c.id;
-                option.textContent = c.name[currentLanguage];
-                catalogSelect.appendChild(option);
-            });
-            catalogSelect.value = catalog.id;
-        }
+        catalogSelect.innerHTML = '';
+        businessData.catalogs.forEach(c => {
+            const option = document.createElement('option');
+            option.value = c.id;
+            option.textContent = c.name[currentLanguage]; // aqui pega a linguagem atual
+            catalogSelect.appendChild(option);
+        });
+        catalogSelect.value = catalogId || businessData.catalogs[0].id;
+
+        const catalog = businessData.catalogs.find(c => c.id === catalogSelect.value);
+        if (!catalog) return;
 
         catalog.categories.forEach(category => {
             const catDiv = document.createElement('div');
@@ -190,14 +188,14 @@
                 const col = document.createElement('div');
                 col.className = 'col-md-4';
                 col.innerHTML = `
-                    <div class="card catalog-card" onclick="openOfferingModal('${offering.id}')">
-                        <img src="${offering.images[0]}" class="card-img-top" alt="${offering.name[currentLanguage]}">
-                        <div class="card-body">
-                            <h5 class="card-title">${offering.name[currentLanguage]}</h5>
-                            <p class="card-text">${offering.description[currentLanguage]}</p>
-                            <span class="badge bg-primary">${offering.price}</span>
-                        </div>
-                    </div>`;
+                <div class="card catalog-card" onclick="openOfferingModal('${offering.id}')">
+                    <img src="${offering.images[0]}" class="card-img-top" alt="${offering.name[currentLanguage]}">
+                    <div class="card-body">
+                        <h5 class="card-title">${offering.name[currentLanguage]}</h5>
+                        <p class="card-text">${offering.description[currentLanguage]}</p>
+                        <span class="badge bg-primary">${offering.price}</span>
+                    </div>
+                </div>`;
                 row.appendChild(col);
             });
 

@@ -7,9 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 public class Category {
   private UUID id;
   private LocalizedContent name;
-  private Set<Offering> offerings;
+  private List<Offering> offerings;
 
-  private Category(UUID id, LocalizedContent name, Set<Offering> offerings) {
+  private Category(UUID id, LocalizedContent name, List<Offering> offerings) {
     this.id = id;
     this.name = name;
     this.offerings = offerings;
@@ -17,10 +17,10 @@ public class Category {
 
   public static Category create(LocalizedContent name) {
     validate(name);
-    return new Category(UUID.randomUUID(), name, new LinkedHashSet<>());
+    return new Category(UUID.randomUUID(), name, new ArrayList<>());
   }
 
-  public static Category load(UUID id, LocalizedContent name, Set<Offering> offeringSet) {
+  public static Category load(UUID id, LocalizedContent name, List<Offering> offeringSet) {
     return new Category(id, name, offeringSet);
   }
 
@@ -68,7 +68,7 @@ public class Category {
     return name;
   }
 
-  public Set<Offering> getOfferings() {
-    return Collections.unmodifiableSet(offerings);
+  public List<Offering> getOfferings() {
+    return Collections.unmodifiableList(offerings);
   }
 }
