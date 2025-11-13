@@ -1,282 +1,296 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Menu do Business</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <title>Business Showcase</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        :root {
-            --sidebar-width: 320px;
-            --header-height: 72px;
-            --shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <style>
         body {
             background-color: #f8f9fa;
-            margin: 0;
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         }
 
-        .site-header {
-            height: var(--header-height);
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 1rem 0;
+            background-color: #fff;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        header img {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .header-controls {
+            position: absolute;
+            right: 1rem;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 1rem;
-            background: #ffffff;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1100;
+            gap: 1rem;
         }
 
-        .site-header .brand {
-            display:flex;
-            align-items:center;
-            gap: 0.75rem;
-        }
-
-        .site-header .brand img {
-            height: 56px;
-            width: 56px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .site-header .controls {
-            display:flex;
-            align-items:center;
-            gap: 0.5rem;
-        }
-
-        .btn-icon {
-            background: transparent;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
+        /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0;
-            right: 0;
-            height: 100vh;
-            width: 0;
-            max-width: var(--sidebar-width);
-            overflow: hidden;
+            right: -320px;
+            width: 300px;
+            height: 100%;
             background: #fff;
-            box-shadow: -4px 0 14px rgba(0,0,0,0.12);
-            transition: width 280ms ease;
-            z-index: 1200;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            box-sizing: border-box;
+            box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1050;
+            overflow-y: auto;
         }
 
         .sidebar.open {
-            width: var(--sidebar-width);
+            right: 0;
         }
 
-        .sidebar .close-btn {
-            align-self: flex-end;
-            border: none;
-            background: transparent;
-            font-size: 1.4rem;
-            cursor: pointer;
-            margin: 0.5rem;
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
         }
 
-        .sidebar .sidebar-body {
-            margin-top: 0.5rem;
-            overflow-y: auto;
+        .sidebar-body {
             padding: 1rem;
         }
 
-        .sidebar .logo-lg {
-            width: 120px;
-            height: 120px;
+        .catalog-card {
+            cursor: pointer;
+        }
+
+        .catalog-card img {
             object-fit: cover;
-            border-radius: 8px;
-            display: block;
-            margin: 0.5rem auto 1rem;
-        }
-
-        .sidebar .social-icons a {
-            font-size: 1.25rem;
-            margin-right: 0.5rem;
-            color: #333;
-        }
-
-        body.sidebar-open { overflow: hidden; }
-
-        .main-container {
-            padding: 2rem 1rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .category-title { margin-top: 2rem; margin-bottom: 1rem; }
-        .offering-card { cursor: pointer; transition: transform 0.1s ease; }
-        .offering-card:hover { transform: translateY(-2px); }
-        .offering-card img { object-fit: cover; height: 200px; width: 100%; border-radius: 6px 6px 0 0; }
-        .price-tag { font-weight: 700; }
-
-        @media (max-width: 576px) {
-            .site-header .brand h1 { font-size: 1rem; }
-            .site-header .brand img { height: 44px; width: 44px; }
+            height: 200px;
         }
     </style>
 </head>
 <body>
 
-<!-- Header -->
-<header class="site-header">
-    <div class="brand">
-        <img src="https://placehold.co/120x120/png?text=Logo" alt="Logo do Business" id="headerLogo">
-        <div>
-            <div id="businessTitle" class="h6 mb-0">Restaurante Exemplo</div>
-            <small id="businessSubtitle" class="text-muted">Menu Oficial</small>
-        </div>
-    </div>
+<!-- HEADER -->
+<header>
+    <img id="businessLogo" src="https://placehold.co/200x60?text=Business+Logo" alt="Business Logo">
 
-    <div class="controls">
-        <select id="languageSelect" class="form-select form-select-sm" style="width:110px;">
+    <div class="header-controls">
+        <select id="languageSelect" class="form-select w-auto" onchange="changeLanguage()">
             <option value="PT">PT</option>
             <option value="EN">EN</option>
-            <option value="ES">ES</option>
         </select>
-
-        <button id="openSidebarBtn" class="btn-icon" aria-label="Open menu">
-            <i class="bi bi-list"></i>
-        </button>
+        <i class="bi bi-list fs-2" role="button" onclick="toggleSidebar(true)"></i>
     </div>
 </header>
 
-<!-- Sidebar -->
-<aside id="sidebar" class="sidebar" aria-hidden="true">
-    <button id="closeSidebarBtn" class="close-btn" aria-label="Close">
-        <i class="bi bi-x-lg"></i>
-    </button>
-
+<!-- SIDEBAR -->
+<aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <h5 id="sidebarTitle">Business Example</h5>
+        <i class="bi bi-x-lg fs-4" role="button" onclick="toggleSidebar(false)"></i>
+    </div>
     <div class="sidebar-body">
-        <img src="https://placehold.co/240x240/png?text=Logo" alt="Logo" class="logo-lg">
-        <h4>Restaurante Exemplo</h4>
-        <p class="text-muted">Rua Exemplo, 123 — Lisboa, Portugal</p>
-        <hr>
-        <h6>Redes sociais</h6>
-        <div class="social-icons mb-3">
-            <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-        </div>
-        <hr>
-        <h6>Informações</h6>
-        <p class="small text-muted mb-0">Aberto: 12:00 — 22:00</p>
-        <p class="small text-muted">Telefone: +351 912 345 678</p>
+        <img src="https://placehold.co/250x100?text=Business+Logo" alt="Logo" class="img-fluid mb-3">
+        <p><strong>Address:</strong><br> Rua das Flores, 123, Lisboa</p>
+        <p><strong>Follow us:</strong></p>
+        <p>
+            <a href="#" class="me-2"><i class="bi bi-instagram fs-4"></i></a>
+            <a href="#"><i class="bi bi-facebook fs-4"></i></a>
+        </p>
     </div>
 </aside>
 
-<!-- Main content -->
-<main class="main-container">
-    <section class="catalog">
-        <h2>Menu Principal</h2>
+<!-- MAIN CONTENT -->
+<div class="container py-5">
+    <h1 id="businessName" class="text-center mb-4">Business Example</h1>
 
-        <div class="category-group">
-            <h4 class="category-title">Entradas</h4>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="mb-4">
+        <select id="catalogSelect" class="form-select" onchange="showCatalogItems()"></select>
+    </div>
 
-                <div class="col">
-                    <div class="card offering-card h-100"
-                         data-title="Bruschetta"
-                         data-description="Pão torrado com tomate, alho e manjericão."
-                         data-price="5.50€"
-                         data-image="https://placehold.co/600x400/png?text=Bruschetta">
-                        <img src="https://placehold.co/600x400/png?text=Bruschetta" class="card-img-top" alt="Bruschetta">
-                        <div class="card-body">
-                            <h5 class="card-title">Bruschetta</h5>
-                            <p class="card-text text-muted small">Pão torrado com tomate, alho e manjericão.</p>
-                        </div>
-                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-                            <div class="price-tag">5.50€</div>
-                            <button class="btn btn-outline-primary btn-sm">Ver</button>
-                        </div>
-                    </div>
-                </div>
+    <div id="catalogItemsContainer"></div>
+</div>
 
-                <div class="col">
-                    <div class="card offering-card h-100"
-                         data-title="Salada Verde"
-                         data-description="Mix de folhas, pepino e molho de limão."
-                         data-price="4.00€"
-                         data-image="https://placehold.co/600x400/png?text=Salada+Verde">
-                        <img src="https://placehold.co/600x400/png?text=Salada+Verde" class="card-img-top" alt="Salada Verde">
-                        <div class="card-body">
-                            <h5 class="card-title">Salada Verde</h5>
-                            <p class="card-text text-muted small">Mix de folhas, pepino e molho de limão.</p>
-                        </div>
-                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-                            <div class="price-tag">4.00€</div>
-                            <button class="btn btn-outline-primary btn-sm">Ver</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-</main>
-
-<!-- Modal -->
+<!-- OFFERING MODAL -->
 <div class="modal fade" id="offeringModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <img id="modalImage" src="" alt="" class="img-fluid rounded-top">
+            <div class="modal-header">
+                <h5 class="modal-title" id="offeringModalTitle">Offering</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
             <div class="modal-body">
-                <h5 id="modalTitle"></h5>
-                <p id="modalDescription" class="text-muted"></p>
-                <div id="modalPrice" class="fw-bold fs-5"></div>
+                <div id="offeringCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="carouselInner"></div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#offeringCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#offeringCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+                <p id="offeringModalDescription">Description</p>
+                <p><strong>Price: </strong><span id="offeringModalPrice">0.00€</span></p>
             </div>
         </div>
     </div>
 </div>
 
+<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const openBtn = document.getElementById('openSidebarBtn');
-    const closeBtn = document.getElementById('closeSidebarBtn');
-    const sidebar = document.getElementById('sidebar');
-    const modal = new bootstrap.Modal(document.getElementById('offeringModal'));
+    function toggleSidebar(open) {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open', open);
+    }
 
-    openBtn.addEventListener('click', () => {
-        sidebar.classList.add('open');
-        document.body.classList.add('sidebar-open');
-    });
-    closeBtn.addEventListener('click', () => {
-        sidebar.classList.remove('open');
-        document.body.classList.remove('sidebar-open');
-    });
+    // MOCK DATA MULTILINGUAL
+    const businessData = {
+        name: { PT: "Restaurante Lisboa", EN: "Lisbon Restaurant" },
+        catalogs: [
+            {
+                id: "catalog1",
+                name: { PT: "Almoço", EN: "Lunch" },
+                categories: [
+                    {
+                        id: "cat1",
+                        name: { PT: "Entradas", EN: "Starters" },
+                        offerings: [
+                            {
+                                id: "offering1",
+                                name: { PT: "Salada Caprese", EN: "Caprese Salad" },
+                                description: { PT: "Tomate, mussarela e manjericão", EN: "Tomato, mozzarella, basil" },
+                                price: "5.50€",
+                                images: [
+                                    'https://placehold.co/800x400?text=Salada+1',
+                                    'https://placehold.co/800x400?text=Salada+2'
+                                ]
+                            },
+                            {
+                                id: "offering2",
+                                name: { PT: "Bruschetta", EN: "Bruschetta" },
+                                description: { PT: "Pão, tomate, alho e azeite", EN: "Bread, tomato, garlic, olive oil" },
+                                price: "4.00€",
+                                images: [
+                                    'https://placehold.co/800x400?text=Bruschetta+1',
+                                    'https://placehold.co/800x400?text=Bruschetta+2'
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "catalog2",
+                name: { PT: "Jantar", EN: "Dinner" },
+                categories: [
+                    {
+                        id: "cat3",
+                        name: { PT: "Pratos Principais", EN: "Main Courses" },
+                        offerings: [
+                            {
+                                id: "offering3",
+                                name: { PT: "Spaghetti Carbonara", EN: "Spaghetti Carbonara" },
+                                description: { PT: "Massa com bacon e queijo", EN: "Pasta with bacon and cheese" },
+                                price: "12.00€",
+                                images: [
+                                    'https://placehold.co/800x400?text=Carbonara+1',
+                                    'https://placehold.co/800x400?text=Carbonara+2'
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
 
-    document.addEventListener('click', e => {
-        if (!sidebar.classList.contains('open')) return;
-        if (!sidebar.contains(e.target) && !openBtn.contains(e.target)) {
-            sidebar.classList.remove('open');
-            document.body.classList.remove('sidebar-open');
-        }
-    });
+    let currentLanguage = 'PT';
 
-    // Modal logic
-    document.querySelectorAll('.offering-card').forEach(card => {
-        card.addEventListener('click', () => {
-            document.getElementById('modalTitle').textContent = card.dataset.title;
-            document.getElementById('modalDescription').textContent = card.dataset.description;
-            document.getElementById('modalPrice').textContent = card.dataset.price;
-            document.getElementById('modalImage').src = card.dataset.image;
-            modal.show();
+    function initializePage() {
+        changeLanguage();
+    }
+
+    function changeLanguage() {
+        const langSelect = document.getElementById('languageSelect');
+        currentLanguage = langSelect.value;
+
+        document.getElementById('businessName').textContent = businessData.name[currentLanguage];
+        document.getElementById('sidebarTitle').textContent = businessData.name[currentLanguage];
+
+        const catalogSelect = document.getElementById('catalogSelect');
+        catalogSelect.innerHTML = '';
+        businessData.catalogs.forEach(catalog => {
+            const option = document.createElement('option');
+            option.value = catalog.id;
+            option.textContent = catalog.name[currentLanguage];
+            catalogSelect.appendChild(option);
         });
-    });
+
+        showCatalogItems();
+    }
+
+    function showCatalogItems() {
+        const catalogId = document.getElementById('catalogSelect').value;
+        const container = document.getElementById('catalogItemsContainer');
+        container.innerHTML = '';
+
+        const catalog = businessData.catalogs.find(c => c.id === catalogId);
+        if (!catalog) return;
+
+        catalog.categories.forEach(category => {
+            const catDiv = document.createElement('div');
+            catDiv.className = 'mb-4';
+            catDiv.innerHTML = `<h4 class="mb-3">${category.name[currentLanguage]}</h4><div class="row g-4"></div>`;
+            const row = catDiv.querySelector('div.row');
+
+            category.offerings.forEach(offering => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4';
+                col.innerHTML = `
+            <div class="card catalog-card" onclick="openOfferingModal('${offering.id}')">
+              <img src="${offering.images[0]}" class="card-img-top" alt="${offering.name[currentLanguage]}">
+              <div class="card-body">
+                <h5 class="card-title">${offering.name[currentLanguage]}</h5>
+                <p class="card-text">${offering.description[currentLanguage]}</p>
+                <span class="badge bg-primary">${offering.price}</span>
+              </div>
+            </div>`;
+                row.appendChild(col);
+            });
+
+            container.appendChild(catDiv);
+        });
+    }
+
+    function openOfferingModal(offeringId) {
+        const offerings = businessData.catalogs.flatMap(c => c.categories.flatMap(cat => cat.offerings));
+        const offering = offerings.find(o => o.id === offeringId);
+        if (!offering) return;
+
+        document.getElementById('offeringModalTitle').textContent = offering.name[currentLanguage];
+        document.getElementById('offeringModalDescription').textContent = offering.description[currentLanguage];
+        document.getElementById('offeringModalPrice').textContent = offering.price;
+
+        const carouselInner = document.getElementById('carouselInner');
+        carouselInner.innerHTML = '';
+        offering.images.forEach((imgUrl, index) => {
+            const div = document.createElement('div');
+            div.className = 'carousel-item' + (index === 0 ? ' active' : '');
+            div.innerHTML = `<img src="${imgUrl}" class="d-block w-100">`;
+            carouselInner.appendChild(div);
+        });
+
+        new bootstrap.Modal(document.getElementById('offeringModal')).show();
+    }
+
+    window.addEventListener('DOMContentLoaded', initializePage);
 </script>
 </body>
 </html>
