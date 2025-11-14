@@ -7,6 +7,7 @@ import dev.thiagooliveira.vitrify.domain.model.LocalizedContent;
 import dev.thiagooliveira.vitrify.domain.model.Offering;
 import dev.thiagooliveira.vitrify.domain.repository.BusinessRepository;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 public class CreateOfferingUseCase {
@@ -23,12 +24,13 @@ public class CreateOfferingUseCase {
       UUID categoryId,
       BigDecimal price,
       LocalizedContent name,
-      LocalizedContent description) {
+      LocalizedContent description,
+      List<String> images) {
     var business =
         this.businessRepository.findById(businessId).orElseThrow(BusinessNotFoundException::new);
     var catalog = business.getCatalog(catalogId).orElseThrow(CatalogNotFoundException::new);
     var category = catalog.getCategory(categoryId).orElseThrow(CategoryNotFoundException::new);
-    var offering = Offering.create(price, name, description);
+    var offering = Offering.create(price, name, description, images);
     business.addOffering(categoryId, offering);
     this.businessRepository.save(business);
     return offering;

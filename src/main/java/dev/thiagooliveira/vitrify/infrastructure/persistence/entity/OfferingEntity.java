@@ -23,6 +23,9 @@ public class OfferingEntity {
   @OneToMany(mappedBy = "offering", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<OfferingTranslationEntity> translations = new ArrayList<>();
 
+  @OneToMany(mappedBy = "offering", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<OfferingImageEntity> images = new ArrayList<>();
+
   public OfferingEntity() {}
 
   public OfferingEntity(UUID id, CategoryEntity category, BigDecimal price) {
@@ -35,6 +38,14 @@ public class OfferingEntity {
     OfferingEntity entity = new OfferingEntity();
     entity.id = offering.getId();
     entity.price = offering.getPrice();
+
+    offering
+        .getImages()
+        .forEach(
+            imageUrl -> {
+              OfferingImageEntity imageEntity = new OfferingImageEntity(entity, imageUrl);
+              entity.getImages().add(imageEntity);
+            });
 
     if (offering.getName() != null) {
       offering
@@ -74,7 +85,12 @@ public class OfferingEntity {
                     t -> new LocalizedText(t.getId().getLanguage(), t.getDescription())));
     LocalizedContent description = new LocalizedContent(descriptionMap);
 
-    return Offering.load(id, price, name, description);
+    return Offering.load(
+        id,
+        price,
+        name,
+        description,
+        this.images.stream().map(OfferingImageEntity::getUrl).collect(Collectors.toList()));
   }
 
   public UUID getId() {
@@ -99,6 +115,14 @@ public class OfferingEntity {
 
   public void setPrice(BigDecimal price) {
     this.price = price;
+  }
+
+  public List<OfferingImageEntity> getImages() {
+    return images;
+  }
+
+  public void setImages(List<OfferingImageEntity> images) {
+    this.images = images;
   }
 
   public List<OfferingTranslationEntity> getTranslations() {

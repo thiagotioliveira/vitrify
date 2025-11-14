@@ -28,10 +28,7 @@ public class OfferingModel {
                 Collectors.toMap(
                     entry -> entry.getKey().toString(), entry -> entry.getValue().content()));
     this.price = offering.getPrice().toString() + CURRENCY;
-    this.images =
-        List.of(
-            "https://placehold.co/800x400?text=800x400",
-            "https://placehold.co/800x400?text=800x400");
+    this.images = offering.getImages();
   }
 
   public UUID getId() {

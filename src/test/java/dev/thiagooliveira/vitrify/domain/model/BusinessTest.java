@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import dev.thiagooliveira.vitrify.domain.exception.DomainException;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -109,7 +110,8 @@ class BusinessTest {
         Offering.create(
             BigDecimal.TEN,
             LocalizedContent.of(Language.PT, SOPA_DO_DIA).with(Language.EN, SOUP_OF_THE_DAY),
-            LocalizedContent.of(Language.PT, SOPA_CASEIRA).with(Language.EN, HOMEMADE_SOUP));
+            LocalizedContent.of(Language.PT, SOPA_CASEIRA).with(Language.EN, HOMEMADE_SOUP),
+            List.of(""));
     business.addOffering(category.getId(), offering);
     assertTrue(category.getOfferings().contains(offering));
   }
@@ -129,7 +131,8 @@ class BusinessTest {
         Offering.create(
             BigDecimal.TEN,
             LocalizedContent.of(Language.PT, SOPA_DO_DIA),
-            LocalizedContent.of(Language.PT, SOPA_CASEIRA).with(Language.EN, HOMEMADE_SOUP));
+            LocalizedContent.of(Language.PT, SOPA_CASEIRA).with(Language.EN, HOMEMADE_SOUP),
+            List.of(""));
     var ex =
         assertThrows(DomainException.class, () -> business.addOffering(category.getId(), offering));
   }

@@ -68,7 +68,8 @@ public class InitDataCommandLine implements CommandLineRunner {
               LocalizedContent.of(Language.PT, offeringConfig.getName().get("PT"))
                   .with(Language.EN, offeringConfig.getName().get("EN")),
               LocalizedContent.of(Language.PT, offeringConfig.getDescription().get("PT"))
-                  .with(Language.EN, offeringConfig.getDescription().get("EN")));
+                  .with(Language.EN, offeringConfig.getDescription().get("EN")),
+              offeringConfig.getImages());
         }
       }
     }

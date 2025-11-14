@@ -105,6 +105,7 @@ public class AppSeedProperties {
     private Map<String, String> name;
     private Map<String, String> description;
     private BigDecimal price;
+    private List<String> images;
 
     public Map<String, String> getName() {
       return name;
@@ -128,6 +129,14 @@ public class AppSeedProperties {
 
     public void setPrice(BigDecimal price) {
       this.price = price;
+    }
+
+    public List<String> getImages() {
+      return images;
+    }
+
+    public void setImages(List<String> images) {
+      this.images = images;
     }
   }
 }

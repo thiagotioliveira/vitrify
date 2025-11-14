@@ -2,8 +2,7 @@ package dev.thiagooliveira.vitrify.domain.model;
 
 import dev.thiagooliveira.vitrify.domain.exception.DomainException;
 import java.math.BigDecimal;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 public class Offering {
@@ -11,42 +10,43 @@ public class Offering {
   private BigDecimal price;
   private LocalizedContent name;
   private LocalizedContent description;
+  private List<String> images;
 
-  private Offering(UUID id, BigDecimal price, LocalizedContent name, LocalizedContent description) {
+  private Offering(
+      UUID id,
+      BigDecimal price,
+      LocalizedContent name,
+      LocalizedContent description,
+      List<String> images) {
     this.id = id;
     this.price = price;
     this.name = name;
     this.description = description;
+    this.images = images != null ? new ArrayList<>(images) : new ArrayList<>();
   }
 
   public static Offering create(
-      BigDecimal price, LocalizedContent name, LocalizedContent description) {
-    validate(price, name, description);
-    return new Offering(UUID.randomUUID(), price, name, description);
+      BigDecimal price, LocalizedContent name, LocalizedContent description, List<String> images) {
+    validate(price, name, description, images);
+    return new Offering(UUID.randomUUID(), price, name, description, images);
   }
 
   public static Offering load(
-      UUID id, BigDecimal price, LocalizedContent name, LocalizedContent description) {
-    return new Offering(id, price, name, description);
+      UUID id,
+      BigDecimal price,
+      LocalizedContent name,
+      LocalizedContent description,
+      List<String> images) {
+    return new Offering(id, price, name, description, images);
   }
 
-  public void update(BigDecimal price, LocalizedContent name, LocalizedContent description) {
-    validate(price, name, description);
+  public void update(
+      BigDecimal price, LocalizedContent name, LocalizedContent description, List<String> images) {
+    validate(price, name, description, images);
     this.price = price;
     this.name = name;
     this.description = description;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) return false;
-    Offering offering = (Offering) o;
-    return Objects.equals(id, offering.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(id);
+    this.images = new ArrayList<>(images);
   }
 
   public UUID getId() {
@@ -65,11 +65,28 @@ public class Offering {
     return price;
   }
 
+  public List<String> getImages() {
+    return Collections.unmodifiableList(images);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) return false;
+    Offering offering = (Offering) o;
+    return Objects.equals(id, offering.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
+  }
+
   private static void validate(
-      BigDecimal price, LocalizedContent name, LocalizedContent description) {
+      BigDecimal price, LocalizedContent name, LocalizedContent description, List<String> images) {
     validatePrice(price);
     validateLocalizedContent(name, "Offering name");
     validateLocalizedContent(description, "Offering description");
+    validateImages(images);
   }
 
   private static void validatePrice(BigDecimal price) {
@@ -91,5 +108,17 @@ public class Offering {
     if (content.getContentMap().isEmpty()) {
       throw new DomainException(fieldName + " must have at least one language translation");
     }
+  }
+
+  private static void validateImages(List<String> images) {
+    if (images == null || images.isEmpty()) {
+      throw new DomainException("Offering must have at least one image");
+    }
+    images.forEach(
+        url -> {
+          if (StringUtils.isBlank(url)) {
+            throw new DomainException("Offering image URL cannot be blank");
+          }
+        });
   }
 }
