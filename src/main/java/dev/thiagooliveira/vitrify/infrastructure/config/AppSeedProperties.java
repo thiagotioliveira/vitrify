@@ -25,6 +25,7 @@ public class AppSeedProperties {
     private String alias;
     private String address;
     private List<String> supportedLanguages;
+    private List<SocialLink> socialLinks;
     private List<Catalog> catalogs;
 
     public String getName() {
@@ -65,6 +66,35 @@ public class AppSeedProperties {
 
     public void setAddress(String address) {
       this.address = address;
+    }
+
+    public List<SocialLink> getSocialLinks() {
+      return socialLinks;
+    }
+
+    public void setSocialLinks(List<SocialLink> socialLinks) {
+      this.socialLinks = socialLinks;
+    }
+  }
+
+  public static class SocialLink {
+    private String type;
+    private String url;
+
+    public String getType() {
+      return type;
+    }
+
+    public void setType(String type) {
+      this.type = type;
+    }
+
+    public String getUrl() {
+      return url;
+    }
+
+    public void setUrl(String url) {
+      this.url = url;
     }
   }
 

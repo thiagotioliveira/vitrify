@@ -3,6 +3,7 @@ package dev.thiagooliveira.vitrify.infrastructure.persistence.entity;
 import dev.thiagooliveira.vitrify.domain.model.Business;
 import dev.thiagooliveira.vitrify.domain.model.Catalog;
 import dev.thiagooliveira.vitrify.domain.model.Language;
+import dev.thiagooliveira.vitrify.domain.model.SocialLink;
 import jakarta.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,6 +32,9 @@ public class BusinessEntity {
   @OneToMany(mappedBy = "business", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<CatalogEntity> catalogs;
 
+  @OneToMany(mappedBy = "business", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<BusinessSocialLinkEntity> socialLinks;
+
   public BusinessEntity() {}
 
   public static BusinessEntity fromDomain(Business business) {
@@ -45,20 +49,33 @@ public class BusinessEntity {
         business.getCatalogs().stream().map(CatalogEntity::fromDomain).collect(Collectors.toList());
 
     entity.catalogs.forEach(catalog -> catalog.setBusiness(entity));
+
+    entity.socialLinks =
+        business.getSocialLinks().stream()
+            .map(BusinessSocialLinkEntity::fromDomain)
+            .collect(Collectors.toList());
+    entity.socialLinks.forEach(link -> link.setBusiness(entity));
+
     return entity;
   }
 
   public Business toDomain() {
-    Set<Catalog> domainCatalogs =
-        catalogs != null
-            ? catalogs.stream().map(CatalogEntity::toDomain).collect(Collectors.toSet())
+    Set<SocialLink> links =
+        socialLinks != null
+            ? socialLinks.stream()
+                .map(BusinessSocialLinkEntity::toDomain)
+                .collect(Collectors.toSet())
+            : new HashSet<>();
+    Set<Catalog> catalogs =
+        this.catalogs != null
+            ? this.catalogs.stream().map(CatalogEntity::toDomain).collect(Collectors.toSet())
             : new HashSet<>();
 
     Set<Language> languages =
         supportedLanguages != null ? new HashSet<>(supportedLanguages) : new HashSet<>();
 
     return Business.load(
-        id, name, alias, Optional.ofNullable(this.address), languages, domainCatalogs);
+        id, name, alias, Optional.ofNullable(this.address), links, languages, catalogs);
   }
 
   public UUID getId() {
@@ -107,5 +124,13 @@ public class BusinessEntity {
 
   public void setAddress(String address) {
     this.address = address;
+  }
+
+  public List<BusinessSocialLinkEntity> getSocialLinks() {
+    return socialLinks;
+  }
+
+  public void setSocialLinks(List<BusinessSocialLinkEntity> socialLinks) {
+    this.socialLinks = socialLinks;
   }
 }

@@ -48,6 +48,33 @@ databaseChangeLog:
             columnNames: business_id, language
 
         - createTable:
+            tableName: business_social_link
+            columns:
+              - column:
+                  name: business_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: url
+                  type: varchar(255)
+              - addPrimaryKey:
+                  tableName: business_social_link
+                  columnNames: business_id, type
+                  constraintName: pk_business_social_link
+              - addForeignKeyConstraint:
+                  baseTableName: business_social_link
+                  baseColumnNames: business_id
+                  referencedTableName: business
+                  referencedColumnNames: id
+                  constraintName: fk_social_link_business
+
+        - createTable:
             tableName: catalog
             columns:
               - column:

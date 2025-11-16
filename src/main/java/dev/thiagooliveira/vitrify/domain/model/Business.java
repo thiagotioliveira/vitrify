@@ -10,6 +10,7 @@ public class Business {
   private String name;
   private String alias;
   private Optional<String> address;
+  private Set<SocialLink> socialLinks;
   private Set<Language> supportedLanguages;
   private Set<Catalog> catalogs;
 
@@ -18,12 +19,14 @@ public class Business {
       String name,
       String alias,
       Optional<String> address,
+      Set<SocialLink> socialLinks,
       Set<Language> supportedLanguages,
       Set<Catalog> catalogs) {
     this.id = id;
     this.name = name;
     this.alias = alias;
     this.address = address;
+    this.socialLinks = socialLinks;
     this.supportedLanguages = supportedLanguages;
     this.catalogs = catalogs;
   }
@@ -33,9 +36,10 @@ public class Business {
       String name,
       String alias,
       Optional<String> address,
+      Set<SocialLink> socialLinks,
       Set<Language> supportedLanguages,
       Set<Catalog> catalogs) {
-    return new Business(id, name, alias, address, supportedLanguages, catalogs);
+    return new Business(id, name, alias, address, socialLinks, supportedLanguages, catalogs);
   }
 
   public static Business create(String name, Set<Language> supportedLanguages) {
@@ -45,6 +49,7 @@ public class Business {
         name,
         generateAlias(name),
         Optional.empty(),
+        new HashSet<>(),
         new HashSet<>(supportedLanguages),
         new LinkedHashSet<>());
   }
@@ -55,6 +60,21 @@ public class Business {
     this.address = Optional.ofNullable(address);
     this.supportedLanguages.clear();
     this.supportedLanguages.addAll(supportedLanguages);
+  }
+
+  public void addLink(SocialLink link) {
+    if (link == null) {
+      throw new DomainException("Link cannot be null");
+    }
+
+    var existingLink =
+        socialLinks.stream().filter(sl -> sl.getType().equals(link.getType())).findFirst();
+
+    if (existingLink.isPresent()) {
+      socialLinks.remove(existingLink.get());
+    }
+
+    socialLinks.add(link);
   }
 
   public void addCatalog(Catalog catalog) {
@@ -173,5 +193,9 @@ public class Business {
 
   public Optional<String> getAddress() {
     return address;
+  }
+
+  public Set<SocialLink> getSocialLinks() {
+    return Collections.unmodifiableSet(socialLinks);
   }
 }

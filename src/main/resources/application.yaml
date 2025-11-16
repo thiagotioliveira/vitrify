@@ -29,9 +29,16 @@ logging:
 app:
   seed:
     business:
-      name: "Sabor & Arte"
-      address: "Rua da Estrela, 123, Lisboa"
+      name: "Food Parade"
+      address: "123 Star Street, Lisbon"
       supported-languages: ["PT", "EN"]
+      social-links:
+        - type: "INSTAGRAM"
+          url: "https://instagram.com/foodparade"
+        - type: "FACEBOOK"
+          url: "https://facebook.com/foodparade"
+        - type: "WEB"
+          url: "https://foodparade.com"
       catalogs:
         - name:
             PT: "Almoço"
@@ -42,120 +49,122 @@ app:
                 EN: "Starters"
               offerings:
                 - name:
-                    PT: "Salada Caprese"
-                    EN: "Caprese Salad"
+                    PT: "Batata-frita"
+                    EN: "French Fries"
                   description:
-                    PT: "Tomate, mussarela e manjericão"
-                    EN: "Tomato, mozzarella, basil"
-                  price: 5.50
-                  images:
-                    - "vp-1.png"
-                    - "vp-2.png"
-                    - "vp-3.png"
-
-                - name:
-                    PT: "Bruschetta"
-                    EN: "Bruschetta"
-                  description:
-                    PT: "Pão, tomate, alho e azeite"
-                    EN: "Bread, tomato, garlic, olive oil"
+                    PT: "Crocrante e deliciosa"
+                    EN: "Crispy and delicious"
                   price: 4.00
                   images:
-                    - "vp-4.png"
                     - "vp-5.png"
-                    - "vp-6.png"
 
                 - name:
-                    PT: "Sopa Fria"
-                    EN: "Cold Soup"
+                    PT: "Salgadinhos"
+                    EN: "Snacks"
                   description:
-                    PT: "Sopa refrescante do dia"
-                    EN: "Refreshing soup of the day"
+                    PT: "Variedade de mini salgados"
+                    EN: "Assorted mini snacks"
+                  price: 5.00
+                  images:
+                    - "vp-9.png"
+
+                - name:
+                    PT: "Toucinho de camarão"
+                    EN: "Shrimp Bites"
+                  description:
+                    PT: "Pequenos e saborosos"
+                    EN: "Small and tasty"
                   price: 6.00
                   images:
-                    - "vp-7.png"
-                    - "vp-8.png"
-                    - "vp-9.png"
+                    - "vp-12.png"
 
             - name:
                 PT: "Pratos Principais"
                 EN: "Main Courses"
               offerings:
                 - name:
-                    PT: "Spaghetti Carbonara"
-                    EN: "Spaghetti Carbonara"
+                    PT: "Pizza"
+                    EN: "Pizza"
                   description:
-                    PT: "Massa com bacon e queijo"
-                    EN: "Pasta with bacon and cheese"
+                    PT: "Massa fresca com queijo e cobertura"
+                    EN: "Fresh dough with cheese and toppings"
                   price: 12.00
                   images:
-                    - "vp-10.png"
                     - "vp-1.png"
+
+                - name:
+                    PT: "Hamburger"
+                    EN: "Hamburger"
+                  description:
+                    PT: "Carne suculenta com queijo"
+                    EN: "Juicy beef with cheese"
+                  price: 10.50
+                  images:
                     - "vp-2.png"
 
                 - name:
-                    PT: "Frango Grelhado"
-                    EN: "Grilled Chicken"
+                    PT: "Frango Frito"
+                    EN: "Fried Chicken"
                   description:
-                    PT: "Frango com legumes e arroz"
-                    EN: "Chicken with vegetables and rice"
-                  price: 15.00
-                  images:
-                    - "vp-3.png"
-                    - "vp-4.png"
-                    - "vp-5.png"
-
-                - name:
-                    PT: "Peixe ao Forno"
-                    EN: "Baked Fish"
-                  description:
-                    PT: "Peixe fresco assado com ervas"
-                    EN: "Fresh fish baked with herbs"
-                  price: 14.50
+                    PT: "Crocrante e saboroso"
+                    EN: "Crispy and tasty"
+                  price: 11.00
                   images:
                     - "vp-6.png"
+
+                - name:
+                    PT: "Tacos"
+                    EN: "Tacos"
+                  description:
+                    PT: "Com carne e temperos especiais"
+                    EN: "With meat and special spices"
+                  price: 9.50
+                  images:
                     - "vp-7.png"
-                    - "vp-8.png"
+
+                - name:
+                    PT: "Sushi"
+                    EN: "Sushi"
+                  description:
+                    PT: "Peixe fresco e arroz temperado"
+                    EN: "Fresh fish with seasoned rice"
+                  price: 15.00
+                  images:
+                    - "vp-11.png"
+
+                - name:
+                    PT: "Peixe Frito"
+                    EN: "Fried Fish"
+                  description:
+                    PT: "Peixe crocante e delicioso"
+                    EN: "Crispy and delicious fish"
+                  price: 14.50
+                  images:
+                    - "vp-15.png"
 
             - name:
                 PT: "Sobremesas"
                 EN: "Desserts"
               offerings:
                 - name:
-                    PT: "Pudim de Leite"
-                    EN: "Caramel Pudding"
+                    PT: "Doces"
+                    EN: "Sweets"
                   description:
-                    PT: "Pudim caseiro"
-                    EN: "Homemade pudding"
+                    PT: "Variedade de doces deliciosos"
+                    EN: "Assorted delicious sweets"
                   price: 6.00
                   images:
-                    - "vp-9.png"
                     - "vp-10.png"
-                    - "vp-1.png"
 
                 - name:
-                    PT: "Mousse de Chocolate"
-                    EN: "Chocolate Mousse"
+                    PT: "Bolo de Brigadeiro"
+                    EN: "Brigadeiro Cake"
                   description:
-                    PT: "Mousse cremosa de chocolate"
-                    EN: "Creamy chocolate mousse"
+                    PT: "Bolo caseiro de brigadeiro"
+                    EN: "Homemade brigadeiro cake"
                   price: 5.50
                   images:
-                    - "vp-2.png"
-                    - "vp-3.png"
-                    - "vp-4.png"
-
-                - name:
-                    PT: "Tarte de Limão"
-                    EN: "Lemon Tart"
-                  description:
-                    PT: "Tarte de limão com merengue"
-                    EN: "Lemon tart with meringue"
-                  price: 6.50
-                  images:
-                    - "vp-5.png"
-                    - "vp-6.png"
-                    - "vp-7.png"
+                    - "vp-14.png"
 
         - name:
             PT: "Jantar"
@@ -166,6 +175,16 @@ app:
                 EN: "Starters"
               offerings:
                 - name:
+                    PT: "Toucinho de Carne"
+                    EN: "Meat Bites"
+                  description:
+                    PT: "Pequenos e suculentos"
+                    EN: "Small and juicy"
+                  price: 6.00
+                  images:
+                    - "vp-16.png"
+
+                - name:
                     PT: "Sopa do Dia"
                     EN: "Soup of the Day"
                   description:
@@ -174,35 +193,19 @@ app:
                   price: 3.50
                   images:
                     - "vp-8.png"
-                    - "vp-9.png"
-                    - "vp-10.png"
-
-                - name:
-                    PT: "Salada Verde"
-                    EN: "Green Salad"
-                  description:
-                    PT: "Alface, rúcula e tomate"
-                    EN: "Lettuce, arugula, and tomato"
-                  price: 5.00
-                  images:
-                    - "vp-1.png"
-                    - "vp-2.png"
-                    - "vp-3.png"
 
             - name:
                 PT: "Pratos Principais"
                 EN: "Main Courses"
               offerings:
                 - name:
-                    PT: "Bacalhau à Brás"
-                    EN: "Codfish à Brás"
+                    PT: "Frango ao Molho"
+                    EN: "Chicken with Sauce"
                   description:
-                    PT: "Bacalhau desfiado com batata palha"
-                    EN: "Shredded cod with shoestring potatoes"
-                  price: 18.00
+                    PT: "Frango grelhado com molho especial"
+                    EN: "Grilled chicken with special sauce"
+                  price: 19.50
                   images:
-                    - "vp-4.png"
-                    - "vp-5.png"
                     - "vp-6.png"
 
                 - name:
@@ -213,18 +216,4 @@ app:
                     EN: "Sea bass with fresh vegetables"
                   price: 20.00
                   images:
-                    - "vp-7.png"
-                    - "vp-8.png"
-                    - "vp-9.png"
-
-                - name:
-                    PT: "Frango ao Molho"
-                    EN: "Chicken with Sauce"
-                  description:
-                    PT: "Frango grelhado com molho especial"
-                    EN: "Grilled chicken with special sauce"
-                  price: 19.50
-                  images:
-                    - "vp-10.png"
-                    - "vp-1.png"
-                    - "vp-2.png"
+                    - "vp-15.png"

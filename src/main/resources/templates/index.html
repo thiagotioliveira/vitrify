@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Business Showcase</title>
+    <title th:text="${business.name}">Business Showcase</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -78,11 +78,19 @@
     </div>
     <div class="sidebar-body">
         <img src="https://placehold.co/250x100?text=250x100" alt="Logo" class="img-fluid mb-3">
-        <div id="businessAddressContainer"></div>
-        <p><strong>Follow us:</strong></p>
-        <p>
-            <a href="#" class="me-2"><i class="bi bi-instagram fs-4"></i></a>
-            <a href="#"><i class="bi bi-facebook fs-4"></i></a>
+        <p th:if="${business.address != null}">
+            <strong>Address:</strong><br>
+            <span th:text="${business.address}"></span>
+        </p>
+        <p th:if="${business.socialLinks != null and !business.socialLinks.isEmpty()}">
+            <strong>Follow us:</strong>
+        </p>
+        <p th:if="${business.socialLinks != null and !business.socialLinks.isEmpty()}">
+            <a th:each="link : ${business.socialLinks}"
+               th:href="${link.url}" target="_blank"
+               class="me-2">
+                <i th:class="${'bi ' + (link.type == 'web' ? 'bi-link' : 'bi-' + link.type.toLowerCase()) + ' fs-4'}"></i>
+            </a>
         </p>
     </div>
 </aside>
@@ -132,7 +140,7 @@
     }
 
     /*<![CDATA[*/
-    const businessData = JSON.parse(/*[[${business}]]*/ 'null');
+    const businessData = JSON.parse(/*[[${businessJson}]]*/ 'null');
     /*]]>*/
 
     let currentLanguage = businessData.supportedLanguages[0];
@@ -150,15 +158,6 @@
 
         document.getElementById('businessName').textContent = businessData.name;
         document.getElementById('sidebarTitle').textContent = businessData.name;
-
-        // Address
-        const addressContainer = document.getElementById('businessAddressContainer');
-        addressContainer.innerHTML = '';
-        if (businessData.address) {
-            const p = document.createElement('p');
-            p.innerHTML = `<strong>Address:</strong><br> ${businessData.address}`;
-            addressContainer.appendChild(p);
-        }
 
         showCatalogItems();
     }

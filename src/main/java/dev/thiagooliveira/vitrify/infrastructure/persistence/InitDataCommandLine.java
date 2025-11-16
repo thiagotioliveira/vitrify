@@ -3,6 +3,8 @@ package dev.thiagooliveira.vitrify.infrastructure.persistence;
 import dev.thiagooliveira.vitrify.application.usecase.*;
 import dev.thiagooliveira.vitrify.domain.model.Language;
 import dev.thiagooliveira.vitrify.domain.model.LocalizedContent;
+import dev.thiagooliveira.vitrify.domain.model.SocialLink;
+import dev.thiagooliveira.vitrify.domain.model.SocialLinkType;
 import dev.thiagooliveira.vitrify.infrastructure.config.AppSeedProperties;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
@@ -20,6 +22,7 @@ public class InitDataCommandLine implements CommandLineRunner {
 
   @Autowired private CreateBusinessUseCase createBusinessUseCase;
   @Autowired private UpdateBusinessUseCase updateBusinessUseCase;
+  @Autowired private UpdateBusinessSocialLinkUseCase updateBusinessSocialLinkUseCase;
   @Autowired private CreateCatalogUseCase createCatalogUseCase;
   @Autowired private CreateCategoryUseCase createCategoryUseCase;
   @Autowired private CreateOfferingUseCase createOfferingUseCase;
@@ -51,6 +54,13 @@ public class InitDataCommandLine implements CommandLineRunner {
             business.getName(),
             businessConfig.getAddress(),
             business.getSupportedLanguages());
+
+    for (AppSeedProperties.SocialLink socialLinkConfig : businessConfig.getSocialLinks()) {
+      updateBusinessSocialLinkUseCase.execute(
+          business.getId(),
+          SocialLink.create(
+              SocialLinkType.valueOf(socialLinkConfig.getType()), socialLinkConfig.getUrl()));
+    }
 
     for (AppSeedProperties.Catalog catalogConfig : businessConfig.getCatalogs()) {
       var catalog =
