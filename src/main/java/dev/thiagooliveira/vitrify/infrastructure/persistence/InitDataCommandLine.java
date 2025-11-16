@@ -19,6 +19,7 @@ public class InitDataCommandLine implements CommandLineRunner {
   private static final Logger log = LoggerFactory.getLogger(InitDataCommandLine.class);
 
   @Autowired private CreateBusinessUseCase createBusinessUseCase;
+  @Autowired private UpdateBusinessUseCase updateBusinessUseCase;
   @Autowired private CreateCatalogUseCase createCatalogUseCase;
   @Autowired private CreateCategoryUseCase createCategoryUseCase;
   @Autowired private CreateOfferingUseCase createOfferingUseCase;
@@ -43,6 +44,13 @@ public class InitDataCommandLine implements CommandLineRunner {
             businessConfig.getSupportedLanguages().stream()
                 .map(Language::valueOf)
                 .collect(Collectors.toSet()));
+
+    business =
+        updateBusinessUseCase.execute(
+            business.getId(),
+            business.getName(),
+            businessConfig.getAddress(),
+            business.getSupportedLanguages());
 
     for (AppSeedProperties.Catalog catalogConfig : businessConfig.getCatalogs()) {
       var catalog =

@@ -30,6 +30,7 @@ app:
   seed:
     business:
       name: "Sabor & Arte"
+      address: "Rua da Estrela, 123, Lisboa"
       supported-languages: ["PT", "EN"]
       catalogs:
         - name:

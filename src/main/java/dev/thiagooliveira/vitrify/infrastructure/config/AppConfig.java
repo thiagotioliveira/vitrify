@@ -14,6 +14,11 @@ public class AppConfig {
   }
 
   @Bean
+  UpdateBusinessUseCase updateBusinessUseCase(BusinessRepository businessRepository) {
+    return new UpdateBusinessUseCase(businessRepository);
+  }
+
+  @Bean
   GetBusinessUseCase getBusinessUseCase(BusinessRepository businessRepository) {
     return new GetBusinessUseCase(businessRepository);
   }

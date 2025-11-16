@@ -19,6 +19,9 @@ public class BusinessEntity {
   @Column(nullable = false, unique = true, name = "business_alias")
   private String alias;
 
+  @Column(nullable = true)
+  private String address;
+
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(name = "business_languages", joinColumns = @JoinColumn(name = "business_id"))
   @Column(name = "language")
@@ -30,18 +33,12 @@ public class BusinessEntity {
 
   public BusinessEntity() {}
 
-  public BusinessEntity(UUID id, String name, String alias, Set<Language> supportedLanguages) {
-    this.id = id;
-    this.name = name;
-    this.alias = alias;
-    this.supportedLanguages = supportedLanguages;
-  }
-
   public static BusinessEntity fromDomain(Business business) {
     BusinessEntity entity = new BusinessEntity();
     entity.id = business.getId();
     entity.name = business.getName();
     entity.alias = business.getAlias();
+    entity.address = business.getAddress().orElse(null);
     entity.supportedLanguages = business.getSupportedLanguages();
 
     entity.catalogs =
@@ -60,7 +57,8 @@ public class BusinessEntity {
     Set<Language> languages =
         supportedLanguages != null ? new HashSet<>(supportedLanguages) : new HashSet<>();
 
-    return Business.load(id, name, alias, languages, domainCatalogs);
+    return Business.load(
+        id, name, alias, Optional.ofNullable(this.address), languages, domainCatalogs);
   }
 
   public UUID getId() {
@@ -101,5 +99,13 @@ public class BusinessEntity {
 
   public void setCatalogs(List<CatalogEntity> catalogs) {
     this.catalogs = catalogs;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
   }
 }

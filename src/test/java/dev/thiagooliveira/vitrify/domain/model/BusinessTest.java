@@ -47,7 +47,7 @@ class BusinessTest {
   void shouldUpdate() {
     var business = Business.create(name, supportedLanguages);
     var newSupportedLanguage = Set.of(Language.PT);
-    business.update(NEW_NAME, newSupportedLanguage);
+    business.update(NEW_NAME, null, newSupportedLanguage);
     assertEquals(NEW_NAME, business.getName());
     assertEquals(PADARIA_PORTUGUESA_ALIAS, business.getAlias());
     assertEquals(newSupportedLanguage, business.getSupportedLanguages());

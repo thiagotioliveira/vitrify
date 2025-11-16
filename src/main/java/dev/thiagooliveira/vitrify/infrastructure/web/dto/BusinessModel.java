@@ -7,11 +7,13 @@ import java.util.stream.Collectors;
 public class BusinessModel {
 
   private final String name;
+  private final String address;
   private final List<String> supportedLanguages;
   private final List<CatalogModel> catalogs;
 
   public BusinessModel(Business business) {
     this.name = business.getName();
+    this.address = business.getAddress().orElse(null);
     this.supportedLanguages =
         business.getSupportedLanguages().stream().map(Enum::name).collect(Collectors.toList());
     this.catalogs =
@@ -20,6 +22,10 @@ public class BusinessModel {
 
   public String getName() {
     return name;
+  }
+
+  public String getAddress() {
+    return address;
   }
 
   public List<String> getSupportedLanguages() {

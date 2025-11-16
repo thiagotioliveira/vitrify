@@ -9,21 +9,33 @@ public class Business {
   private UUID id;
   private String name;
   private String alias;
+  private Optional<String> address;
   private Set<Language> supportedLanguages;
   private Set<Catalog> catalogs;
 
   private Business(
-      UUID id, String name, String alias, Set<Language> supportedLanguages, Set<Catalog> catalogs) {
+      UUID id,
+      String name,
+      String alias,
+      Optional<String> address,
+      Set<Language> supportedLanguages,
+      Set<Catalog> catalogs) {
     this.id = id;
     this.name = name;
     this.alias = alias;
+    this.address = address;
     this.supportedLanguages = supportedLanguages;
     this.catalogs = catalogs;
   }
 
   public static Business load(
-      UUID id, String name, String alias, Set<Language> supportedLanguages, Set<Catalog> catalogs) {
-    return new Business(id, name, alias, supportedLanguages, catalogs);
+      UUID id,
+      String name,
+      String alias,
+      Optional<String> address,
+      Set<Language> supportedLanguages,
+      Set<Catalog> catalogs) {
+    return new Business(id, name, alias, address, supportedLanguages, catalogs);
   }
 
   public static Business create(String name, Set<Language> supportedLanguages) {
@@ -32,13 +44,15 @@ public class Business {
         UUID.randomUUID(),
         name,
         generateAlias(name),
+        Optional.empty(),
         new HashSet<>(supportedLanguages),
         new LinkedHashSet<>());
   }
 
-  public void update(String name, Set<Language> supportedLanguages) {
+  public void update(String name, String address, Set<Language> supportedLanguages) {
     validate(name, supportedLanguages);
     this.name = name;
+    this.address = Optional.ofNullable(address);
     this.supportedLanguages.clear();
     this.supportedLanguages.addAll(supportedLanguages);
   }
@@ -155,5 +169,9 @@ public class Business {
 
   public Set<Catalog> getCatalogs() {
     return Collections.unmodifiableSet(catalogs);
+  }
+
+  public Optional<String> getAddress() {
+    return address;
   }
 }

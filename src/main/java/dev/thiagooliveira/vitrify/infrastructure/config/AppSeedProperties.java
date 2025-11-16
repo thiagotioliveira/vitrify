@@ -23,6 +23,7 @@ public class AppSeedProperties {
   public static class Business {
     private String name;
     private String alias;
+    private String address;
     private List<String> supportedLanguages;
     private List<Catalog> catalogs;
 
@@ -56,6 +57,14 @@ public class AppSeedProperties {
 
     public void setCatalogs(List<Catalog> catalogs) {
       this.catalogs = catalogs;
+    }
+
+    public String getAddress() {
+      return address;
+    }
+
+    public void setAddress(String address) {
+      this.address = address;
     }
   }
 

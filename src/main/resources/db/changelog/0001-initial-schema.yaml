@@ -19,6 +19,11 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: address
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
         - createIndex:
             tableName: business
             indexName: idx_business_alias
