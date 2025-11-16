@@ -4,9 +4,7 @@ import static dev.thiagooliveira.vitrify.domain.model.Constants.CURRENCY;
 import static dev.thiagooliveira.vitrify.domain.model.Constants.PREFIX_IMAGE_URL;
 
 import dev.thiagooliveira.vitrify.domain.model.Offering;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OfferingModel {
@@ -52,6 +50,14 @@ public class OfferingModel {
   }
 
   public List<String> getImages() {
-    return images;
+    if (images == null || images.isEmpty()) {
+      return Collections.emptyList();
+    }
+
+    List<String> result = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      result.add(images.get(i % images.size()));
+    }
+    return result;
   }
 }

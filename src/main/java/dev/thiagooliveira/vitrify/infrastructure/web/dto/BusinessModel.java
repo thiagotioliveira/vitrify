@@ -1,8 +1,6 @@
 package dev.thiagooliveira.vitrify.infrastructure.web.dto;
 
 import dev.thiagooliveira.vitrify.domain.model.Business;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,15 +40,6 @@ public class BusinessModel {
   }
 
   public List<SocialLinkModel> getSocialLinks() {
-    if (socialLinks == null || socialLinks.isEmpty()) {
-      return Collections.emptyList();
-    }
-
-    // queremos até 3 elementos
-    List<SocialLinkModel> result = new ArrayList<>();
-    for (int i = 0; i < 3; i++) {
-      result.add(socialLinks.get(i % socialLinks.size()));
-    }
-    return result;
+    return socialLinks;
   }
 }
