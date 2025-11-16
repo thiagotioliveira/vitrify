@@ -97,8 +97,6 @@
 
 <!-- MAIN CONTENT -->
 <div class="container py-5">
-    <h1 id="businessName" class="text-center mb-4">Business Example</h1>
-
     <div class="mb-4">
         <select id="catalogSelect" class="form-select" onchange="showCatalogItems()"></select>
     </div>
@@ -156,7 +154,6 @@
         });
         langSelect.value = currentLanguage;
 
-        document.getElementById('businessName').textContent = businessData.name;
         document.getElementById('sidebarTitle').textContent = businessData.name;
 
         showCatalogItems();
