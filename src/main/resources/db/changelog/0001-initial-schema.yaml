@@ -196,20 +196,18 @@ databaseChangeLog:
             tableName: offering_image
             columns:
               - column:
-                  name: id
-                  type: uuid
-                  constraints:
-                    primaryKey: true
-              - column:
                   name: offering_id
                   type: uuid
                   constraints:
                     nullable: false
               - column:
-                  name: url
+                  name: name
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - addPrimaryKey:
+                  tableName: offering_image
+                  columnNames: offering_id, name
               - addForeignKeyConstraint:
                   baseTableName: offering_image
                   baseColumnNames: offering_id

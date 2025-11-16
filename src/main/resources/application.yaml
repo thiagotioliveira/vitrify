@@ -48,9 +48,9 @@ app:
                     EN: "Tomato, mozzarella, basil"
                   price: 5.50
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-1.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-2.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-3.png"
+                    - "vp-1.png"
+                    - "vp-2.png"
+                    - "vp-3.png"
 
                 - name:
                     PT: "Bruschetta"
@@ -60,9 +60,9 @@ app:
                     EN: "Bread, tomato, garlic, olive oil"
                   price: 4.00
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-4.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-5.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-6.png"
+                    - "vp-4.png"
+                    - "vp-5.png"
+                    - "vp-6.png"
 
                 - name:
                     PT: "Sopa Fria"
@@ -72,9 +72,9 @@ app:
                     EN: "Refreshing soup of the day"
                   price: 6.00
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-7.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-8.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-9.png"
+                    - "vp-7.png"
+                    - "vp-8.png"
+                    - "vp-9.png"
 
             - name:
                 PT: "Pratos Principais"
@@ -88,9 +88,9 @@ app:
                     EN: "Pasta with bacon and cheese"
                   price: 12.00
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-10.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-1.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-2.png"
+                    - "vp-10.png"
+                    - "vp-1.png"
+                    - "vp-2.png"
 
                 - name:
                     PT: "Frango Grelhado"
@@ -100,9 +100,9 @@ app:
                     EN: "Chicken with vegetables and rice"
                   price: 15.00
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-3.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-4.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-5.png"
+                    - "vp-3.png"
+                    - "vp-4.png"
+                    - "vp-5.png"
 
                 - name:
                     PT: "Peixe ao Forno"
@@ -112,9 +112,9 @@ app:
                     EN: "Fresh fish baked with herbs"
                   price: 14.50
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-6.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-7.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-8.png"
+                    - "vp-6.png"
+                    - "vp-7.png"
+                    - "vp-8.png"
 
             - name:
                 PT: "Sobremesas"
@@ -128,9 +128,9 @@ app:
                     EN: "Homemade pudding"
                   price: 6.00
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-9.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-10.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-1.png"
+                    - "vp-9.png"
+                    - "vp-10.png"
+                    - "vp-1.png"
 
                 - name:
                     PT: "Mousse de Chocolate"
@@ -140,9 +140,9 @@ app:
                     EN: "Creamy chocolate mousse"
                   price: 5.50
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-2.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-3.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-4.png"
+                    - "vp-2.png"
+                    - "vp-3.png"
+                    - "vp-4.png"
 
                 - name:
                     PT: "Tarte de Limão"
@@ -152,9 +152,9 @@ app:
                     EN: "Lemon tart with meringue"
                   price: 6.50
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-5.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-6.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-7.png"
+                    - "vp-5.png"
+                    - "vp-6.png"
+                    - "vp-7.png"
 
         - name:
             PT: "Jantar"
@@ -172,9 +172,9 @@ app:
                     EN: "Chef's special flavor"
                   price: 3.50
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-8.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-9.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-10.png"
+                    - "vp-8.png"
+                    - "vp-9.png"
+                    - "vp-10.png"
 
                 - name:
                     PT: "Salada Verde"
@@ -184,9 +184,9 @@ app:
                     EN: "Lettuce, arugula, and tomato"
                   price: 5.00
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-1.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-2.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-3.png"
+                    - "vp-1.png"
+                    - "vp-2.png"
+                    - "vp-3.png"
 
             - name:
                 PT: "Pratos Principais"
@@ -200,9 +200,9 @@ app:
                     EN: "Shredded cod with shoestring potatoes"
                   price: 18.00
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-4.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-5.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-6.png"
+                    - "vp-4.png"
+                    - "vp-5.png"
+                    - "vp-6.png"
 
                 - name:
                     PT: "Robalo Grelhado"
@@ -212,9 +212,9 @@ app:
                     EN: "Sea bass with fresh vegetables"
                   price: 20.00
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-7.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-8.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-9.png"
+                    - "vp-7.png"
+                    - "vp-8.png"
+                    - "vp-9.png"
 
                 - name:
                     PT: "Frango ao Molho"
@@ -224,6 +224,6 @@ app:
                     EN: "Grilled chicken with special sauce"
                   price: 19.50
                   images:
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-10.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-1.png"
-                    - "https://themes.pixelstrap.net/zomo/landing/frontend/assets/images/product/vp-2.png"
+                    - "vp-10.png"
+                    - "vp-1.png"
+                    - "vp-2.png"

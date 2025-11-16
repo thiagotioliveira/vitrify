@@ -1,6 +1,7 @@
 package dev.thiagooliveira.vitrify.infrastructure.web.dto;
 
 import static dev.thiagooliveira.vitrify.domain.model.Constants.CURRENCY;
+import static dev.thiagooliveira.vitrify.domain.model.Constants.PREFIX_IMAGE_URL;
 
 import dev.thiagooliveira.vitrify.domain.model.Offering;
 import java.util.List;
@@ -28,7 +29,10 @@ public class OfferingModel {
                 Collectors.toMap(
                     entry -> entry.getKey().toString(), entry -> entry.getValue().content()));
     this.price = offering.getPrice().toString() + CURRENCY;
-    this.images = offering.getImages();
+    this.images =
+        offering.getImages().stream()
+            .map(s -> String.format(PREFIX_IMAGE_URL, s))
+            .collect(Collectors.toList());
   }
 
   public UUID getId() {

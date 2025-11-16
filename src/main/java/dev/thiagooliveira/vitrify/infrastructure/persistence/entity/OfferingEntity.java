@@ -90,7 +90,7 @@ public class OfferingEntity {
         price,
         name,
         description,
-        this.images.stream().map(OfferingImageEntity::getUrl).collect(Collectors.toList()));
+        this.images.stream().map(OfferingImageEntity::getName).collect(Collectors.toList()));
   }
 
   public UUID getId() {
