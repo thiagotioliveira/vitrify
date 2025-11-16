@@ -5,14 +5,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.thiagooliveira.vitrify.application.usecase.GetBusinessUseCase;
 import dev.thiagooliveira.vitrify.infrastructure.web.dto.BusinessModel;
 import java.util.Map;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/p")
+@RequestMapping
 public class IndexController {
 
   private final GetBusinessUseCase getBusinessUseCase;
@@ -21,7 +23,7 @@ public class IndexController {
     this.getBusinessUseCase = getBusinessUseCase;
   }
 
-  @GetMapping("/{alias}")
+  @GetMapping("/p/{alias}")
   public ModelAndView index(@PathVariable("alias") String alias) throws JsonProcessingException {
     var business =
         this.getBusinessUseCase.findByAlias(alias).orElseThrow(IllegalArgumentException::new);
@@ -34,4 +36,8 @@ public class IndexController {
             "businessJson",
             new ObjectMapper().writeValueAsString(businessModel)));
   }
+
+  @GetMapping("/")
+  @ResponseStatus(HttpStatus.OK)
+  public void root() {}
 }
