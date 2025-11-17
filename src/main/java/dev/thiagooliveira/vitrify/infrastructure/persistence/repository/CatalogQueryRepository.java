@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface CatalogQueryRepository extends JpaRepository<CatalogEntity, Long> {
+public interface CatalogQueryRepository extends JpaRepository<CatalogEntity, UUID> {
   @Query(
 """
     select

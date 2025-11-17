@@ -3,7 +3,9 @@ package dev.thiagooliveira.vitrify.infrastructure.persistence.repository;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.thiagooliveira.vitrify.application.query.dto.CatalogSummary;
+import dev.thiagooliveira.vitrify.application.query.dto.CategorySummary;
 import dev.thiagooliveira.vitrify.application.query.usecase.GetCatalogUseCase;
+import dev.thiagooliveira.vitrify.application.query.usecase.GetCategoryUseCase;
 import dev.thiagooliveira.vitrify.infrastructure.config.AppConfig;
 import dev.thiagooliveira.vitrify.infrastructure.config.AppSeedProperties;
 import dev.thiagooliveira.vitrify.infrastructure.persistence.InitDataCommandLine;
@@ -33,9 +35,11 @@ import org.springframework.context.annotation.Import;
   CategoryQueryAdapter.class,
   InitDataCommandLine.class
 })
-class CatalogQueryRepositoryTest {
+class CategoryQueryRepositoryTest {
 
   @Autowired private GetCatalogUseCase getCatalogUseCase;
+
+  @Autowired private GetCategoryUseCase getCategoryUseCase;
 
   @Autowired private AppSeedProperties appSeedProperties;
 
@@ -43,8 +47,10 @@ class CatalogQueryRepositoryTest {
   void setUp() {}
 
   @Test
-  void findAllByBusinessId() {
-    List<CatalogSummary> result = getCatalogUseCase.execute(appSeedProperties.getBusinessId());
+  void findAllByBusinessIdAndCatalogId() {
+    List<CatalogSummary> catalogs = getCatalogUseCase.execute(appSeedProperties.getBusinessId());
+    List<CategorySummary> result =
+        getCategoryUseCase.execute(appSeedProperties.getBusinessId(), catalogs.get(0).getId());
     assertFalse(result.isEmpty());
   }
 }
