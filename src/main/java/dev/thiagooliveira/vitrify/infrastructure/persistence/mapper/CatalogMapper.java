@@ -11,9 +11,9 @@ public class CatalogMapper {
     var result = new ArrayList<CatalogSummary>();
     list.forEach(
         c -> {
-          var catalogOp = result.stream().filter(v -> v.getId().equals(c.getId())).findFirst();
-          if (catalogOp.isPresent()) {
-            catalogOp.get().getName().with(c.getLanguage(), c.getName());
+          var op = result.stream().filter(v -> v.getId().equals(c.getId())).findFirst();
+          if (op.isPresent()) {
+            op.get().getName().with(c.getLanguage(), c.getName());
           } else {
             result.add(
                 CatalogSummary.load(c.getBusinessId(), c.getId(), c.getLanguage(), c.getName()));

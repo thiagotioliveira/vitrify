@@ -2,8 +2,10 @@ package dev.thiagooliveira.vitrify.infrastructure.config;
 
 import dev.thiagooliveira.vitrify.application.query.CatalogQuery;
 import dev.thiagooliveira.vitrify.application.query.CategoryQuery;
+import dev.thiagooliveira.vitrify.application.query.OfferingQuery;
 import dev.thiagooliveira.vitrify.application.query.usecase.GetCatalogUseCase;
 import dev.thiagooliveira.vitrify.application.query.usecase.GetCategoryUseCase;
+import dev.thiagooliveira.vitrify.application.query.usecase.GetOfferingUseCase;
 import dev.thiagooliveira.vitrify.application.usecase.*;
 import dev.thiagooliveira.vitrify.domain.repository.BusinessRepository;
 import org.springframework.context.annotation.Bean;
@@ -51,6 +53,11 @@ public class AppConfig {
   @Bean
   CreateCategoryUseCase createCategoryUseCase(BusinessRepository businessRepository) {
     return new CreateCategoryUseCase(businessRepository);
+  }
+
+  @Bean
+  GetOfferingUseCase getOfferingUseCase(OfferingQuery offeringQuery) {
+    return new GetOfferingUseCase(offeringQuery);
   }
 
   @Bean
