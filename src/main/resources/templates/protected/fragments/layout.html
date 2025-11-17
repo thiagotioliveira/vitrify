@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout (content)">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} ?: 'Vitrina Admin'">Vitrify Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" th:href="@{/css/admin.css}">-->
+    <style>
+        body { background-color: #f8f9fa; margin: 0; }
+
+        /* Sidebar fixa */
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            color: #fff;
+            padding-top: 1rem;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ddd;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+            color: #fff;
+        }
+
+        /* Conteúdo ajustado ao lado da sidebar */
+        .content {
+            margin-left: 240px; /* igual a largura da sidebar */
+            padding: 2rem;
+            max-width: calc(100vw - 240px);
+            overflow-x: hidden;
+        }
+
+        /* Responsividade para tabelas */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table-actions button {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            .content {
+                margin-left: 0;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h4 class="text-center mb-4">Vitrify</h4>
+    <a th:href="@{/protected/business}">Business</a>
+    <a th:href="@{/protected/catalog}">Catalogs</a>
+    <a th:href="@{/protected/category}">Categories</a>
+    <a th:href="@{/protected/offering}">Offerings</a>
+</div>
+
+<div class="content container-fluid py-4">
+    <div th:insert="~{protected/fragments/alert :: alert}"></div>
+    <div th:insert="${content}"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
