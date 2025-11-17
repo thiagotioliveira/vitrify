@@ -26,7 +26,7 @@ public class IndexController {
   @GetMapping("/p/{alias}")
   public ModelAndView index(@PathVariable("alias") String alias) throws JsonProcessingException {
     var business =
-        this.getBusinessUseCase.findByAlias(alias).orElseThrow(IllegalArgumentException::new);
+        this.getBusinessUseCase.execute(alias).orElseThrow(IllegalArgumentException::new);
     BusinessModel businessModel = new BusinessModel(business);
     return new ModelAndView(
         "index",

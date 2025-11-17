@@ -2,14 +2,10 @@ package dev.thiagooliveira.vitrify.infrastructure.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import dev.thiagooliveira.vitrify.application.query.dto.CatalogSummary;
-import dev.thiagooliveira.vitrify.application.query.dto.CategorySummary;
-import dev.thiagooliveira.vitrify.application.query.usecase.GetCatalogUseCase;
-import dev.thiagooliveira.vitrify.application.query.usecase.GetCategoryUseCase;
+import dev.thiagooliveira.vitrify.application.query.usecase.GetBusinessUseCase;
 import dev.thiagooliveira.vitrify.infrastructure.config.AppConfig;
 import dev.thiagooliveira.vitrify.infrastructure.config.AppSeedProperties;
 import dev.thiagooliveira.vitrify.infrastructure.persistence.InitDataCommandLine;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +33,9 @@ import org.springframework.context.annotation.Import;
   OfferingQueryAdapter.class,
   InitDataCommandLine.class
 })
-class CategoryQueryRepositoryTest {
+class BusinessQueryRepositoryTest {
 
-  @Autowired private GetCatalogUseCase getCatalogUseCase;
-
-  @Autowired private GetCategoryUseCase getCategoryUseCase;
+  @Autowired private GetBusinessUseCase getBusinessUseCase;
 
   @Autowired private AppSeedProperties appSeedProperties;
 
@@ -49,10 +43,8 @@ class CategoryQueryRepositoryTest {
   void setUp() {}
 
   @Test
-  void findAllByBusinessIdAndCatalogId() {
-    List<CatalogSummary> catalogs = getCatalogUseCase.execute(appSeedProperties.getBusinessId());
-    List<CategorySummary> result =
-        getCategoryUseCase.execute(appSeedProperties.getBusinessId(), catalogs.get(0).getId());
-    assertFalse(result.isEmpty());
+  void findAById() {
+    var business = getBusinessUseCase.execute(appSeedProperties.getBusinessId());
+    assertNotNull(business);
   }
 }

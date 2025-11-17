@@ -1,5 +1,6 @@
 package dev.thiagooliveira.vitrify.infrastructure.config;
 
+import dev.thiagooliveira.vitrify.application.query.BusinessQuery;
 import dev.thiagooliveira.vitrify.application.query.CatalogQuery;
 import dev.thiagooliveira.vitrify.application.query.CategoryQuery;
 import dev.thiagooliveira.vitrify.application.query.OfferingQuery;
@@ -33,6 +34,13 @@ public class AppConfig {
   @Bean
   GetBusinessUseCase getBusinessUseCase(BusinessRepository businessRepository) {
     return new GetBusinessUseCase(businessRepository);
+  }
+
+  @Bean
+  dev.thiagooliveira.vitrify.application.query.usecase.GetBusinessUseCase getBusinessQueryUseCase(
+      BusinessQuery businessQuery) {
+    return new dev.thiagooliveira.vitrify.application.query.usecase.GetBusinessUseCase(
+        businessQuery);
   }
 
   @Bean

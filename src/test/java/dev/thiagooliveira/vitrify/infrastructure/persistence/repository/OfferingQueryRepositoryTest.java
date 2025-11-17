@@ -33,6 +33,7 @@ import org.springframework.context.annotation.Import;
   AppSeedProperties.class,
   AppConfig.class,
   BusinessRepositoryAdapter.class,
+  BusinessQueryAdapter.class,
   CatalogQueryAdapter.class,
   CategoryQueryAdapter.class,
   OfferingQueryAdapter.class,

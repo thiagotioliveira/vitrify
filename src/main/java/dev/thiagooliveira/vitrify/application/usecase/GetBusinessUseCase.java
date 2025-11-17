@@ -17,7 +17,7 @@ public class GetBusinessUseCase {
     return businessRepository.findById(businessId);
   }
 
-  public Optional<Business> findByAlias(String alias) {
+  public Optional<Business> execute(String alias) {
     return businessRepository.findByAlias(alias);
   }
 }
