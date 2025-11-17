@@ -47,7 +47,7 @@ public class InitDataCommandLine implements CommandLineRunner {
             businessConfig.getSupportedLanguages().stream()
                 .map(Language::valueOf)
                 .collect(Collectors.toSet()));
-
+    appSeedProperties.setBusinessId(business.getId());
     business =
         updateBusinessUseCase.execute(
             business.getId(),

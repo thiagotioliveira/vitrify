@@ -3,12 +3,15 @@ package dev.thiagooliveira.vitrify.infrastructure.config;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "app.seed")
 public class AppSeedProperties {
+
+  private UUID businessId;
 
   private Business business;
 
@@ -18,6 +21,14 @@ public class AppSeedProperties {
 
   public void setBusiness(Business business) {
     this.business = business;
+  }
+
+  public UUID getBusinessId() {
+    return businessId;
+  }
+
+  public void setBusinessId(UUID businessId) {
+    this.businessId = businessId;
   }
 
   public static class Business {

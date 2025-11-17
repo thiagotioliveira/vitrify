@@ -1,5 +1,7 @@
 package dev.thiagooliveira.vitrify.infrastructure.config;
 
+import dev.thiagooliveira.vitrify.application.query.CatalogQuery;
+import dev.thiagooliveira.vitrify.application.query.usecase.GetCatalogUseCase;
 import dev.thiagooliveira.vitrify.application.usecase.*;
 import dev.thiagooliveira.vitrify.domain.repository.BusinessRepository;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,11 @@ public class AppConfig {
   @Bean
   GetBusinessUseCase getBusinessUseCase(BusinessRepository businessRepository) {
     return new GetBusinessUseCase(businessRepository);
+  }
+
+  @Bean
+  GetCatalogUseCase getCatalogUseCase(CatalogQuery catalogQuery) {
+    return new GetCatalogUseCase(catalogQuery);
   }
 
   @Bean
