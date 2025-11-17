@@ -111,7 +111,7 @@ class BusinessTest {
             BigDecimal.TEN,
             LocalizedContent.of(Language.PT, SOPA_DO_DIA).with(Language.EN, SOUP_OF_THE_DAY),
             LocalizedContent.of(Language.PT, SOPA_CASEIRA).with(Language.EN, HOMEMADE_SOUP),
-            List.of(""));
+            List.of("mock.png"));
     business.addOffering(category.getId(), offering);
     assertTrue(category.getOfferings().contains(offering));
   }
@@ -132,7 +132,7 @@ class BusinessTest {
             BigDecimal.TEN,
             LocalizedContent.of(Language.PT, SOPA_DO_DIA),
             LocalizedContent.of(Language.PT, SOPA_CASEIRA).with(Language.EN, HOMEMADE_SOUP),
-            List.of(""));
+            List.of("mock.png"));
     var ex =
         assertThrows(DomainException.class, () -> business.addOffering(category.getId(), offering));
   }

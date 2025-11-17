@@ -31,6 +31,7 @@ import org.springframework.context.annotation.Import;
   BusinessRepositoryAdapter.class,
   CatalogQueryAdapter.class,
   CategoryQueryAdapter.class,
+  OfferingQueryAdapter.class,
   InitDataCommandLine.class
 })
 class CatalogQueryRepositoryTest {
