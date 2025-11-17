@@ -25,8 +25,8 @@ public class AppSeedProperties {
     private String alias;
     private String address;
     private List<String> supportedLanguages;
-    private List<SocialLink> socialLinks;
-    private List<Catalog> catalogs;
+    private List<SocialLink> socialLinks = List.of();
+    private List<Catalog> catalogs = List.of();
 
     public String getName() {
       return name;
