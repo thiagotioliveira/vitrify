@@ -1,5 +1,6 @@
 package dev.thiagooliveira.vitrify.domain.model;
 
+import dev.thiagooliveira.vitrify.domain.exception.CatalogNotFoundException;
 import dev.thiagooliveira.vitrify.domain.exception.DomainException;
 import java.text.Normalizer;
 import java.util.*;
@@ -90,6 +91,14 @@ public class Business {
     }
 
     this.catalogs.add(catalog);
+  }
+
+  public void removeCatalog(UUID catalogId) {
+    var catalog = getCatalog(catalogId).orElseThrow(CatalogNotFoundException::new);
+    if (!catalog.getCategories().isEmpty()) {
+      throw new DomainException("Cannot remove catalog with categories");
+    }
+    catalogs.removeIf(c -> c.getId().equals(catalogId));
   }
 
   public void addCategory(UUID catalogId, Category category) {

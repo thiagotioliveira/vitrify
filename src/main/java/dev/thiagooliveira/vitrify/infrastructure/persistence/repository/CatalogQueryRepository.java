@@ -21,4 +21,19 @@ public interface CatalogQueryRepository extends JpaRepository<CatalogEntity, UUI
     where c.business.id =:businessId
 """)
   List<CatalogProjection> findAllByBusinessId(@Param("businessId") UUID businessId);
+
+  @Query(
+      """
+                select
+                    c.id as id,
+                    c.business.id as businessId,
+                    t.id.language as language,
+                    t.name as name
+                from CatalogEntity c
+                join c.translations t
+                where c.business.id =:businessId
+                            and c.id =:id
+            """)
+  List<CatalogProjection> findByIdAndBusinessId(
+      @Param("id") UUID id, @Param("businessId") UUID businessId);
 }

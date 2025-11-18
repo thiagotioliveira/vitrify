@@ -54,6 +54,16 @@ public class AppConfig {
   }
 
   @Bean
+  UpdateCatalogUseCase updateCatalogUseCase(BusinessRepository businessRepository) {
+    return new UpdateCatalogUseCase(businessRepository);
+  }
+
+  @Bean
+  DeleteCatalogUseCase deleteCatalogUseCase(BusinessRepository businessRepository) {
+    return new DeleteCatalogUseCase(businessRepository);
+  }
+
+  @Bean
   GetCategoryUseCase getCategoryUseCase(CategoryQuery categoryQuery) {
     return new GetCategoryUseCase(categoryQuery);
   }

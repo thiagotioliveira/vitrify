@@ -3,14 +3,22 @@ package dev.thiagooliveira.vitrify.infrastructure.web.admin.dto;
 import dev.thiagooliveira.vitrify.application.query.dto.CatalogSummary;
 import dev.thiagooliveira.vitrify.domain.model.Catalog;
 import dev.thiagooliveira.vitrify.domain.model.Language;
+import dev.thiagooliveira.vitrify.domain.model.LocalizedContent;
+import dev.thiagooliveira.vitrify.domain.model.LocalizedText;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class CatalogModel {
-  private final UUID businessId;
-  private final UUID id;
+  private UUID businessId;
+  private UUID id;
   private Map<Language, String> name = new EnumMap<>(Language.class);
+
+  public CatalogModel(UUID businessId) {
+    this.businessId = businessId;
+  }
+
+  public CatalogModel() {}
 
   public CatalogModel(CatalogSummary catalogSummary) {
     this.businessId = catalogSummary.getBusinessId();
@@ -34,6 +42,16 @@ public class CatalogModel {
     }
   }
 
+  public String textFor(Language lang) {
+    return name.getOrDefault(lang, "");
+  }
+
+  public LocalizedContent getNameLocalizedContent() {
+    var texts = new EnumMap<Language, LocalizedText>(Language.class);
+    name.forEach((lang, text) -> texts.put(lang, new LocalizedText(lang, text)));
+    return new LocalizedContent(texts);
+  }
+
   public UUID getBusinessId() {
     return businessId;
   }
@@ -44,5 +62,17 @@ public class CatalogModel {
 
   public Map<Language, String> getName() {
     return name;
+  }
+
+  public void setBusinessId(UUID businessId) {
+    this.businessId = businessId;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
+
+  public void setName(Map<Language, String> name) {
+    this.name = name;
   }
 }

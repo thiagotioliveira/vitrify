@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{protected/fragments/layout :: layout(~{::content})}">
+<div th:fragment="content">
+
+    <h2 th:text="${catalog.id != null ? 'Edit Catalog' : 'New Catalog'}"></h2>
+
+    <form th:action="@{/protected/catalog/save}" method="post" th:object="${catalog}">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{businessId}">
+
+        <!-- Nome por linguagem -->
+        <div th:each="lang : ${supportedLanguages}" class="mb-3">
+            <label class="form-label" th:text="'Name (' + ${lang} + ')'">Name</label>
+            <input type="text" class="form-control"
+                   th:name="'name[' + ${lang} + ']'"
+                   th:value="${catalog.textFor(lang)}">
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <a th:href="@{/protected/catalog}" class="btn btn-secondary me-2">Cancel</a>
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </form>
+
+</div>
+</html>
