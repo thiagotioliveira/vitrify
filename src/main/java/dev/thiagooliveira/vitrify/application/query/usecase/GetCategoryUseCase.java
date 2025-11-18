@@ -13,7 +13,7 @@ public class GetCategoryUseCase {
     this.categoryQuery = categoryQuery;
   }
 
-  public List<CategorySummary> execute(UUID businessId, UUID catalogId) {
-    return this.categoryQuery.findAllByBusinessIdAndCatalogId(businessId, catalogId);
+  public List<CategorySummary> execute(UUID businessId) {
+    return this.categoryQuery.findAllByBusinessId(businessId);
   }
 }

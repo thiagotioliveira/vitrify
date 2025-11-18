@@ -17,8 +17,7 @@ public class CategoryQueryAdapter implements CategoryQuery {
   }
 
   @Override
-  public List<CategorySummary> findAllByBusinessIdAndCatalogId(UUID businessId, UUID catalogId) {
-    return CategoryMapper.map(
-        this.categoryQueryRepository.findAllByBusinessIdAndCatalogId(businessId, catalogId));
+  public List<CategorySummary> findAllByBusinessId(UUID businessId) {
+    return CategoryMapper.map(this.categoryQueryRepository.findAllByBusinessId(businessId));
   }
 }

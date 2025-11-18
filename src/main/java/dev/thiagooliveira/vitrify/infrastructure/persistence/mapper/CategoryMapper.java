@@ -14,10 +14,17 @@ public class CategoryMapper {
           var op = result.stream().filter(v -> v.getId().equals(c.getId())).findFirst();
           if (op.isPresent()) {
             op.get().getName().with(c.getLanguage(), c.getName());
+            op.get().getCatalogName().with(c.getCatalogLanguage(), c.getCatalogName());
           } else {
             result.add(
                 CategorySummary.load(
-                    c.getBusinessId(), c.getCatalogId(), c.getId(), c.getLanguage(), c.getName()));
+                    c.getBusinessId(),
+                    c.getCatalogId(),
+                    c.getCatalogLanguage(),
+                    c.getCatalogName(),
+                    c.getId(),
+                    c.getLanguage(),
+                    c.getName()));
           }
         });
     return result;

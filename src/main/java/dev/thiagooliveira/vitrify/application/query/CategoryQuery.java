@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public interface CategoryQuery {
 
-  List<CategorySummary> findAllByBusinessIdAndCatalogId(UUID businessId, UUID catalogId);
+  List<CategorySummary> findAllByBusinessId(UUID businessId);
 }

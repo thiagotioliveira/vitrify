@@ -9,6 +9,10 @@ public interface CategoryProjection {
 
   UUID getCatalogId();
 
+  Language getCatalogLanguage();
+
+  String getCatalogName();
+
   UUID getId();
 
   Language getLanguage();

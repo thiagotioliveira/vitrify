@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{protected/fragments/layout :: layout(~{::content})}">
+<div th:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Categories</h2>
+        <a th:href="@{/protected/category/new}" class="btn btn-primary">+ New Category</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+            <tr>
+                <th>Catalog</th>
+                <th>Name</th>
+                <!--<th>Created At</th>-->
+                <!--<th>Active</th>-->
+                <th class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${categories}">
+                <td>
+                    <div th:each="entry : ${category.catalogName}">
+                        <span class="badge bg-secondary me-1" th:text="${entry.key}">PT</span>
+                        <span th:text="${entry.value}">Comida</span>
+                        <br/>
+                    </div>
+                </td>
+                <td>
+                    <!-- Agora iteramos diretamente sobre o Map name -->
+                    <div th:each="entry : ${category.name}">
+                        <span class="badge bg-secondary me-1" th:text="${entry.key}">PT</span>
+                        <span th:text="${entry.value}">Comida</span>
+                        <br/>
+                    </div>
+                </td>
+                <!--<td th:text="${#dates.format(catalog.createdAt, 'dd/MM/yyyy')}">10/11/2025</td>-->
+                <!--<td>
+                   <span th:text="${catalog.active} ? 'Yes' : 'No'"
+                         th:classappend="${catalog.active} ? 'badge bg-success' : 'badge bg-secondary'">
+                       Yes
+                   </span>
+                       </td>-->
+                <td class="text-end table-actions">
+                    <a th:href="@{/protected/category/edit/{id}(id=${category.id})}" class="btn btn-sm btn-warning">Edit</a>
+                    <button type="button" class="btn btn-sm btn-danger"
+                            data-bs-toggle="modal"
+                            th:data-bs-target="'#confirmDeleteModal'"
+                            th:data-id="${category.id}"
+                            th:data-name="${#strings.arrayJoin(category.name.values(), ', ')}">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal de confirmação -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form th:action="@{/protected/category/delete}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete <strong id="deleteName">this catalog</strong>?</p>
+                        <input type="hidden" name="id" id="deleteId">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('confirmDeleteModal');
+            modal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var id = button.getAttribute('data-id');
+                var name = button.getAttribute('data-name');
+
+                modal.querySelector('#deleteId').value = id;
+                modal.querySelector('#deleteName').textContent = name;
+            });
+        });
+    </script>
+</div>

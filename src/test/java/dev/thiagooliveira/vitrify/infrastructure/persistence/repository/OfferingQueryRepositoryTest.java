@@ -2,7 +2,6 @@ package dev.thiagooliveira.vitrify.infrastructure.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import dev.thiagooliveira.vitrify.application.query.dto.CatalogSummary;
 import dev.thiagooliveira.vitrify.application.query.dto.CategorySummary;
 import dev.thiagooliveira.vitrify.application.query.dto.OfferingSummary;
 import dev.thiagooliveira.vitrify.application.query.usecase.GetCatalogUseCase;
@@ -54,12 +53,14 @@ class OfferingQueryRepositoryTest {
 
   @Test
   void findAllByBusinessIdAndCatalogId() {
-    List<CatalogSummary> catalogs = getCatalogUseCase.execute(appSeedProperties.getBusinessId());
+    // List<CatalogSummary> catalogs = getCatalogUseCase.execute(appSeedProperties.getBusinessId());
     List<CategorySummary> categories =
-        getCategoryUseCase.execute(appSeedProperties.getBusinessId(), catalogs.get(0).getId());
+        getCategoryUseCase.execute(appSeedProperties.getBusinessId());
     List<OfferingSummary> result =
         getOfferingUseCase.execute(
-            appSeedProperties.getBusinessId(), catalogs.get(0).getId(), categories.get(0).getId());
+            appSeedProperties.getBusinessId(),
+            categories.get(0).getCatalogId(),
+            categories.get(0).getId());
     assertFalse(result.isEmpty());
   }
 }

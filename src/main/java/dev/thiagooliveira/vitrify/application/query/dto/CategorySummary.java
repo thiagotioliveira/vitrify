@@ -8,19 +8,37 @@ import java.util.UUID;
 public class CategorySummary {
   private final UUID businessId;
   private final UUID catalogId;
+  private final LocalizedContent catalogName;
   private final UUID id;
   private final LocalizedContent name;
 
-  public CategorySummary(UUID businessId, UUID catalogId, UUID id, LocalizedContent name) {
+  public CategorySummary(
+      UUID businessId,
+      UUID catalogId,
+      LocalizedContent catalogName,
+      UUID id,
+      LocalizedContent name) {
     this.businessId = businessId;
     this.catalogId = catalogId;
+    this.catalogName = catalogName;
     this.id = id;
     this.name = name;
   }
 
   public static CategorySummary load(
-      UUID businessId, UUID catalogId, UUID id, Language language, String name) {
-    return new CategorySummary(businessId, catalogId, id, LocalizedContent.of(language, name));
+      UUID businessId,
+      UUID catalogId,
+      Language language1,
+      String catalogName,
+      UUID id,
+      Language language,
+      String name) {
+    return new CategorySummary(
+        businessId,
+        catalogId,
+        LocalizedContent.of(language1, catalogName),
+        id,
+        LocalizedContent.of(language, name));
   }
 
   public UUID getBusinessId() {
@@ -37,6 +55,10 @@ public class CategorySummary {
 
   public UUID getCatalogId() {
     return catalogId;
+  }
+
+  public LocalizedContent getCatalogName() {
+    return catalogName;
   }
 
   @Override
