@@ -6,6 +6,5 @@ import java.util.UUID;
 
 public interface OfferingQuery {
 
-  List<OfferingSummary> findAllByBusinessIdAndCatalogIdAndCategoryId(
-      UUID businessId, UUID catalogId, UUID categoryId);
+  List<OfferingSummary> findAllByBusinessId(UUID businessId);
 }

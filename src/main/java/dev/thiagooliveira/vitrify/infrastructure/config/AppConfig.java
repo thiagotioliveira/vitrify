@@ -74,6 +74,16 @@ public class AppConfig {
   }
 
   @Bean
+  UpdateCategoryUseCase updateCategoryUseCase(BusinessRepository businessRepository) {
+    return new UpdateCategoryUseCase(businessRepository);
+  }
+
+  @Bean
+  DeleteCategoryUseCase deleteCategoryUseCase(BusinessRepository businessRepository) {
+    return new DeleteCategoryUseCase(businessRepository);
+  }
+
+  @Bean
   GetOfferingUseCase getOfferingUseCase(OfferingQuery offeringQuery) {
     return new GetOfferingUseCase(offeringQuery);
   }

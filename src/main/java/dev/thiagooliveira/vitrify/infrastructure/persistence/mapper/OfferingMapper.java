@@ -15,12 +15,18 @@ public class OfferingMapper {
           if (op.isPresent()) {
             op.get().getName().with(c.getLanguage(), c.getName());
             op.get().getDescription().with(c.getLanguage(), c.getDescription());
+            op.get().getCategoryName().with(c.getCategoryLanguage(), c.getCategoryName());
+            op.get().getCatalogName().with(c.getCatalogLanguage(), c.getCatalogName());
           } else {
             result.add(
                 OfferingSummary.load(
                     c.getBusinessId(),
                     c.getCatalogId(),
+                    c.getCatalogLanguage(),
+                    c.getCatalogName(),
                     c.getCategoryId(),
+                    c.getCategoryLanguage(),
+                    c.getCategoryName(),
                     c.getId(),
                     c.getLanguage(),
                     c.getName(),

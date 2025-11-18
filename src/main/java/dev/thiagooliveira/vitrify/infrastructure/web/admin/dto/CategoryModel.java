@@ -36,6 +36,10 @@ public class CategoryModel {
     }
   }
 
+  public CategoryModel(UUID businessId) {
+    this.businessId = businessId;
+  }
+
   public String textFor(Language lang) {
     return name.getOrDefault(lang, "");
   }

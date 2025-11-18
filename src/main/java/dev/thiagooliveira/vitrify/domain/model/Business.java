@@ -1,6 +1,7 @@
 package dev.thiagooliveira.vitrify.domain.model;
 
 import dev.thiagooliveira.vitrify.domain.exception.CatalogNotFoundException;
+import dev.thiagooliveira.vitrify.domain.exception.CategoryNotFoundException;
 import dev.thiagooliveira.vitrify.domain.exception.DomainException;
 import java.text.Normalizer;
 import java.util.*;
@@ -101,6 +102,24 @@ public class Business {
     catalogs.removeIf(c -> c.getId().equals(catalogId));
   }
 
+  public void moveCategory(UUID categoryId, UUID newCatalogId) {
+    var category = getCategory(categoryId).orElseThrow(CategoryNotFoundException::new);
+    for (Catalog catalog : catalogs) {
+      catalog.getCategories().removeIf(cat -> cat.getId().equals(category.getId()));
+    }
+    addCategory(newCatalogId, category);
+  }
+
+  public void removeCategory(UUID categoryId) {
+    var category = getCategory(categoryId).orElseThrow(CategoryNotFoundException::new);
+    if (!category.getOfferings().isEmpty()) {
+      throw new DomainException("Cannot remove category with offerings");
+    }
+    for (Catalog catalog : catalogs) {
+      catalog.getCategories().removeIf(cat -> cat.getId().equals(category.getId()));
+    }
+  }
+
   public void addCategory(UUID catalogId, Category category) {
     if (category == null) {
       throw new DomainException("Category cannot be null");
@@ -149,6 +168,13 @@ public class Business {
 
   public Optional<Catalog> getCatalog(UUID catalogId) {
     return this.catalogs.stream().filter(c -> c.getId().equals(catalogId)).findFirst();
+  }
+
+  public Optional<Category> getCategory(UUID categoryId) {
+    return this.catalogs.stream()
+        .flatMap(catalog -> catalog.getCategories().stream())
+        .filter(cat -> cat.getId().equals(categoryId))
+        .findFirst();
   }
 
   private static void validate(String name, Set<Language> supportedLanguages) {

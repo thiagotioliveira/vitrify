@@ -14,7 +14,11 @@ public interface OfferingQueryRepository extends JpaRepository<OfferingEntity, U
     select
         o.id as id,
         o.category.id as categoryId,
+        ttt.id.language as categoryLanguage,
+        ttt.name as categoryName,
         ca.id as catalogId,
+        tt.id.language as catalogLanguage,
+        tt.name as catalogName,
         ca.business.id as businessId,
         t.id.language as language,
         t.name as name,
@@ -22,13 +26,10 @@ public interface OfferingQueryRepository extends JpaRepository<OfferingEntity, U
     from OfferingEntity o
     join o.translations t
     join o.category ct
+    join ct.translations ttt
     join ct.catalog ca
-    where ca.id =:catalogId
-    and ca.business.id =:businessId
-    and ct.id =:categoryId
+    join ca.translations tt
+    where ca.business.id =:businessId
 """)
-  List<OfferingProjection> findAllByBusinessIdAndCatalogIdAndCategoryId(
-      @Param("businessId") UUID businessId,
-      @Param("catalogId") UUID catalogId,
-      @Param("categoryId") UUID categoryId);
+  List<OfferingProjection> findAllByBusinessId(@Param("businessId") UUID businessId);
 }

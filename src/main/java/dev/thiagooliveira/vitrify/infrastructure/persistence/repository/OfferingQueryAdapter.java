@@ -17,10 +17,7 @@ public class OfferingQueryAdapter implements OfferingQuery {
   }
 
   @Override
-  public List<OfferingSummary> findAllByBusinessIdAndCatalogIdAndCategoryId(
-      UUID businessId, UUID catalogId, UUID categoryId) {
-    return OfferingMapper.map(
-        this.offeringQueryRepository.findAllByBusinessIdAndCatalogIdAndCategoryId(
-            businessId, catalogId, categoryId));
+  public List<OfferingSummary> findAllByBusinessId(UUID businessId) {
+    return OfferingMapper.map(this.offeringQueryRepository.findAllByBusinessId(businessId));
   }
 }

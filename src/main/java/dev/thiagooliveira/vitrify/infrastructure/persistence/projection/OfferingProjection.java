@@ -9,7 +9,15 @@ public interface OfferingProjection {
 
   UUID getCatalogId();
 
+  Language getCatalogLanguage();
+
+  String getCatalogName();
+
   UUID getCategoryId();
+
+  Language getCategoryLanguage();
+
+  String getCategoryName();
 
   UUID getId();
 

@@ -4,6 +4,7 @@ import dev.thiagooliveira.vitrify.application.query.CategoryQuery;
 import dev.thiagooliveira.vitrify.application.query.dto.CategorySummary;
 import dev.thiagooliveira.vitrify.infrastructure.persistence.mapper.CategoryMapper;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 
@@ -19,5 +20,13 @@ public class CategoryQueryAdapter implements CategoryQuery {
   @Override
   public List<CategorySummary> findAllByBusinessId(UUID businessId) {
     return CategoryMapper.map(this.categoryQueryRepository.findAllByBusinessId(businessId));
+  }
+
+  @Override
+  public Optional<CategorySummary> findByIdAndBusinessId(UUID categoryId, UUID businessId) {
+    return CategoryMapper.map(
+            this.categoryQueryRepository.findByIdAndBusinessId(categoryId, businessId))
+        .stream()
+        .findFirst();
   }
 }

@@ -73,6 +73,6 @@ public class Catalog {
   }
 
   public List<Category> getCategories() {
-    return Collections.unmodifiableList(categories);
+    return categories;
   }
 }

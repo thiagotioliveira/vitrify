@@ -56,11 +56,7 @@ class OfferingQueryRepositoryTest {
     // List<CatalogSummary> catalogs = getCatalogUseCase.execute(appSeedProperties.getBusinessId());
     List<CategorySummary> categories =
         getCategoryUseCase.execute(appSeedProperties.getBusinessId());
-    List<OfferingSummary> result =
-        getOfferingUseCase.execute(
-            appSeedProperties.getBusinessId(),
-            categories.get(0).getCatalogId(),
-            categories.get(0).getId());
+    List<OfferingSummary> result = getOfferingUseCase.execute(appSeedProperties.getBusinessId());
     assertFalse(result.isEmpty());
   }
 }

@@ -15,7 +15,7 @@ spring:
     password: admin
   h2:
     console:
-      enabled: false
+      enabled: true
 logging:
   level:
     ROOT: off

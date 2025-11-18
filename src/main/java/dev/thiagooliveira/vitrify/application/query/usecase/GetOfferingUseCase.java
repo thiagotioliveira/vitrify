@@ -13,8 +13,7 @@ public class GetOfferingUseCase {
     this.offeringQuery = offeringQuery;
   }
 
-  public List<OfferingSummary> execute(UUID businessId, UUID catalogId, UUID categoryId) {
-    return this.offeringQuery.findAllByBusinessIdAndCatalogIdAndCategoryId(
-        businessId, catalogId, categoryId);
+  public List<OfferingSummary> execute(UUID businessId) {
+    return this.offeringQuery.findAllByBusinessId(businessId);
   }
 }

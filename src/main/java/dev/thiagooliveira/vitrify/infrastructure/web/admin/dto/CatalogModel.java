@@ -6,8 +6,10 @@ import dev.thiagooliveira.vitrify.domain.model.Language;
 import dev.thiagooliveira.vitrify.domain.model.LocalizedContent;
 import dev.thiagooliveira.vitrify.domain.model.LocalizedText;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CatalogModel {
   private UUID businessId;
@@ -50,6 +52,12 @@ public class CatalogModel {
     var texts = new EnumMap<Language, LocalizedText>(Language.class);
     name.forEach((lang, text) -> texts.put(lang, new LocalizedText(lang, text)));
     return new LocalizedContent(texts);
+  }
+
+  public String multiLangName(List<Language> supportedLanguages) {
+    return supportedLanguages.stream()
+        .map(lang -> lang + ": " + textFor(lang))
+        .collect(Collectors.joining(" | "));
   }
 
   public UUID getBusinessId() {

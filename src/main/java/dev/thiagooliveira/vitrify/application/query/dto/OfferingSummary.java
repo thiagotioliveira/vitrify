@@ -8,7 +8,9 @@ import java.util.UUID;
 public class OfferingSummary {
   private final UUID businessId;
   private final UUID catalogId;
+  private final LocalizedContent catalogName;
   private final UUID categoryId;
+  private final LocalizedContent categoryName;
   private final UUID id;
   private final LocalizedContent name;
   private final LocalizedContent description;
@@ -16,13 +18,17 @@ public class OfferingSummary {
   public OfferingSummary(
       UUID businessId,
       UUID catalogId,
+      LocalizedContent catalogName,
       UUID categoryId,
+      LocalizedContent categoryName,
       UUID id,
       LocalizedContent name,
       LocalizedContent description) {
     this.businessId = businessId;
     this.catalogId = catalogId;
+    this.catalogName = catalogName;
     this.categoryId = categoryId;
+    this.categoryName = categoryName;
     this.id = id;
     this.name = name;
     this.description = description;
@@ -31,7 +37,11 @@ public class OfferingSummary {
   public static OfferingSummary load(
       UUID businessId,
       UUID catalogId,
+      Language language1,
+      String catalogName,
       UUID categoryId,
+      Language language2,
+      String categoryName,
       UUID id,
       Language language,
       String name,
@@ -39,7 +49,9 @@ public class OfferingSummary {
     return new OfferingSummary(
         businessId,
         catalogId,
+        LocalizedContent.of(language1, catalogName),
         categoryId,
+        LocalizedContent.of(language2, categoryName),
         id,
         LocalizedContent.of(language, name),
         LocalizedContent.of(language, description));
@@ -67,6 +79,14 @@ public class OfferingSummary {
 
   public LocalizedContent getDescription() {
     return description;
+  }
+
+  public LocalizedContent getCategoryName() {
+    return categoryName;
+  }
+
+  public LocalizedContent getCatalogName() {
+    return catalogName;
   }
 
   @Override
